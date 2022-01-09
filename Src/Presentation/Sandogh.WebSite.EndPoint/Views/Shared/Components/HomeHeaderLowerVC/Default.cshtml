@@ -1,0 +1,107 @@
+﻿<!--Header Lower-->
+<div class="header-lower">
+    <div class="auto-container">
+        <div class="outer-box">
+            <div class="nav-outer clearfix">
+                <!-- Main Menu -->
+                <nav class="main-menu">
+                    <div class="navbar-header clearfix">
+                        <!-- Toggle Button -->
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+
+                    <div class="navbar-collapse collapse clearfix">
+                        <ul class="navigation clearfix">
+                            <li> <a href="/">خانه</a> </li>
+                            @*   <li class="dropdown">
+                                <a href="#">درباره ما</a>
+                                <ul>
+                                <li><a href="about.html">درباره ما</a></li>
+                                <li><a href="team.html">تیم</a></li>
+                                <li><a href="error.html">صفحه خطا</a></li>
+                                </ul>
+                                </li>
+                                <li class="dropdown">
+                                <a href="#">خدمات</a>
+                                <ul>
+                                <li><a href="services.html">خدمات 1</a></li>
+                                <li><a href="services-2.html">خدمات 2</a></li>
+                                <li><a href="service-detail.html">جزئیات خدمت</a></li>
+                                </ul>
+                                </li>
+                                <li class="dropdown">
+                                <a href="#">پروژه ها</a>
+                                <ul>
+                                <li><a href="project.html">پروژه ها</a></li>
+                                <li><a href="project-detail.html">جزئیات پروژه</a></li>
+                                </ul>
+                                </li>
+                                <li class="dropdown">
+                                <a href="#">فروشگاه</a>
+                                <ul>
+                                <li><a href="shop.html">فروشگاه</a></li>
+                                <li><a href="shop-single.html">جزئیات محصول فروشگاه</a></li>
+                                </ul>
+                                </li>
+                                <li class="dropdown">
+                                <a href="#">بلاگ</a>
+                                <ul>
+                                <li><a href="blog.html">بلاگ ما</a></li>
+                                <li><a href="blog-single.html">جزئیات مطلب بلاگ</a></li>
+                                </ul>
+                                </li>*@
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <li>
+                                    <a href="@Url.Action("Profile","Account")">@User.Identity.Name</a>
+                                </li>
+                                <li>
+                                    <a>
+                                        <form action="@Url.Action("Logout","Account")" method="post">
+                                            <input type="submit" value="خروج" style="background-color:transparent"/>
+                                        </form>
+                                    </a>
+
+                                </li>
+                            }
+                            else
+                            {
+                                <li>
+                                    <a href="@Url.Action("Login","Account")">
+                                        ورود
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Register","Account")">
+                                        ثبت نام
+                                    </a>
+                                </li>
+
+
+                            }
+
+
+                        </ul>
+                    </div>
+                </nav>
+                <!-- Main Menu End-->
+                <!--Search form-->
+                <div class="search-form">
+                    <form method="post" action="contact.html">
+                        <div class="form-group">
+                            <input type="text" name="search" value="" placeholder="جستجو ..." required>
+                            <button type="submit" class="theme-btn"><span class="icon fa fa-search"></span></button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--End Header Lower-->

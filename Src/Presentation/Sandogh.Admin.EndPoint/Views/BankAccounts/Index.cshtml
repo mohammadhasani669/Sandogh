@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Sandogh.Domain.BankAccounts.BankAccount>
+
+
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(m => m.BankName)</th>
+                <th>@Html.DisplayNameFor(m => m.AccountNumber)</th>
+                <th>@Html.DisplayNameFor(m => m.CardNumber)</th>
+                <th>@Html.DisplayNameFor(m => m.BankBranch)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+           {
+               <tr>
+                   <td>@item.BankName</td>
+                   <td>@item.AccountNumber</td>
+                   <td>@item.CardNumber</td>
+                   <td>@item.BankBranch</td>
+               </tr>
+           }
+        </tbody>
+    </table>
+

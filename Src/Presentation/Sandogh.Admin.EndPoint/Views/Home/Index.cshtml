@@ -1,0 +1,211 @@
+﻿@model Sandogh.Application.Visitors.GetToDayReport.ResultTodayReportDto
+@{
+    ViewData["Title"] = "Home Page";
+}
+<style>
+
+    .highcharts-figure, .highcharts-data-table table {
+        min-width: 360px;
+        max-width: 1000px;
+        margin: 1em auto;
+    }
+
+    .highcharts-data-table table {
+        font-family: Verdana, sans-serif;
+        border-collapse: collapse;
+        border: 1px solid #ebebeb;
+        margin: 10px auto;
+        text-align: center;
+        width: 100%;
+        max-width: 500px;
+    }
+
+    .highcharts-data-table caption {
+        padding: 1em 0;
+        font-size: 1.2em;
+        color: #555;
+    }
+
+    .highcharts-data-table th {
+        font-weight: 600;
+        padding: 0.5em;
+    }
+
+    .highcharts-data-table td,
+    .highcharts-data-table th,
+    .highcharts-data-table caption {
+        padding: 0.5em;
+    }
+
+    .highcharts-data-table thead tr,
+    .highcharts-data-table tr:nth-child(even) {
+        background: #f8f8f8;
+    }
+
+    .highcharts-data-table tr:hover {
+        background: #f1f7ff;
+    }
+</style>
+
+<div class="row">
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-info">
+            <div class="inner">
+                <h3>150</h3>
+
+                <p>New Orders</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-bag"></i>
+            </div>
+            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-success">
+            <div class="inner">
+                <h3>53<sup style="font-size: 20px">%</sup></h3>
+
+                <p>Bounce Rate</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-stats-bars"></i>
+            </div>
+            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-warning">
+            <div class="inner">
+                <h3>44</h3>
+
+                <p>User Registrations</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-person-add"></i>
+            </div>
+            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-danger">
+            <div class="inner">
+                <h3>65</h3>
+
+                <p>Unique Visitors</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-pie-graph"></i>
+            </div>
+            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+    <!-- ./col -->
+</div>
+
+
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/series-label.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+<figure class="highcharts-figure">
+    <div id="container"></div>
+
+</figure>
+
+<figure  class="highcharts-figure">
+    <div id="containerDay"></div>
+
+</figure>
+
+<script>
+
+    var DisplayHour=@Html.Raw(Json.Serialize(Model.ToDay.VisitorPerHour.Display));
+    var ValueHour=@Html.Raw(Json.Serialize(Model.ToDay.VisitorPerHour.Value));
+
+    Highcharts.chart('container', {
+
+      title: {
+        text: ' تعداد بازددید کاربران در طول روز '
+      },
+
+      subtitle: {
+        text: 'Source: thesolarfoundation.com'
+      },
+
+      yAxis: {
+        title: {
+          text: 'تعداد بازدید از صفحات سایت'
+        }
+      },
+
+        xAxis: {
+                categories:DisplayHour
+            },
+
+      legend: {
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'middle'
+      },
+
+      //plotOptions: {
+      //  series: {
+      //    label: {
+      //      connectorAllowed: false
+      //    },
+      //    pointStart: 2010
+      //  }
+      //},
+
+      series: [{
+          name: "بازدید کاربران",
+                data:ValueHour
+            }],
+
+      responsive: {
+        rules: [{
+          condition: {
+            maxWidth: 500
+          },
+          chartOptions: {
+            legend: {
+              layout: 'horizontal',
+              align: 'center',
+              verticalAlign: 'bottom'
+            }
+          }
+        }]
+      }
+
+    });
+
+
+            var DisplayDay=@Html.Raw(Json.Serialize(Model.generalStats.VisitorPerDay.Display));
+            var ValueDay=@Html.Raw(Json.Serialize(Model.generalStats.VisitorPerDay.Value));
+
+          const chartDay = Highcharts.chart('containerDay', {
+                title: {
+                text: 'در طول یکماه اخیر'
+            },
+            xAxis: {
+                categories:DisplayDay// ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+            },
+            series: [{
+                data:ValueDay// [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
+            }]
+        });
+
+
+
+</script>
