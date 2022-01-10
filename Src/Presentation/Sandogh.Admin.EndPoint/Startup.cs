@@ -13,7 +13,7 @@ using Sandogh.Application.Interfaces.Contexts;
 using Sandogh.Application.People.Repository;
 using Sandogh.Application.Visitors.GetToDayReport;
 using Sandogh.Infrastructure.IdentityConfigs;
-
+using Sandogh.Infrastructure.MappingProfile;
 using Sandogh.Persistance.Contexts;
 using System;
 using System.Collections.Generic;
@@ -50,7 +50,7 @@ namespace Sandogh.Admin.EndPoint
             //Add MediatR
             services.AddMediatR(typeof(AddBankAccountCommand).Assembly);
 
-
+            services.AddAutoMapper(typeof(BankAccountMappingProfile));
 
             services.AddAuthentication();
 

@@ -36,5 +36,16 @@ namespace Sandogh.Persistance.Contexts
         public DbSet<Person> People { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
 
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(DatabaseContext).Assembly);
+
+
+            base.OnModelCreating(modelBuilder); 
+        }
     }
+
+    
 }

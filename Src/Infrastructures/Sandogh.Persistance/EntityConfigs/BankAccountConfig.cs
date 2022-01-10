@@ -13,7 +13,7 @@ namespace Sandogh.Persistance.EntityConfigs
     {
         public void Configure(EntityTypeBuilder<BankAccount> builder)
         {
-
+            builder.Property(p => p.BankName).HasMaxLength(100);
         }
     }
 }
