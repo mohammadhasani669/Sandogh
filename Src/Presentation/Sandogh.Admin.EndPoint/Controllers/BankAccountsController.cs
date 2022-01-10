@@ -48,5 +48,7 @@ namespace Sandogh.Admin.EndPoint.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+
     }
 }

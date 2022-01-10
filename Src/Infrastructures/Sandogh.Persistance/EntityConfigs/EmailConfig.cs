@@ -7,13 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sandogh.Application.EntityConfig
+namespace Sandogh.Persistance.EntityConfigs
 {
     public class EmailConfig : IEntityTypeConfiguration<Email>
     {
         public void Configure(EntityTypeBuilder<Email> builder)
         {
-            
+
         }
     }
 }

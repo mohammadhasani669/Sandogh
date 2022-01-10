@@ -7,13 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sandogh.Application.BankAccounts.Config
+namespace Sandogh.Persistance.EntityConfigs
 {
     public class BankAccountConfig : IEntityTypeConfiguration<BankAccount>
     {
         public void Configure(EntityTypeBuilder<BankAccount> builder)
         {
-            
+
         }
     }
 }

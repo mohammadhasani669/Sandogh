@@ -6,7 +6,7 @@ namespace Sandogh.WebSite.EndPoint.Components
     {
         public FooterVC()
         {
-
+           
         }
 
         public IViewComponentResult Invoke()
