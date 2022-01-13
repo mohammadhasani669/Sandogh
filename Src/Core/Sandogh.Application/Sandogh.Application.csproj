@@ -22,7 +22,6 @@
     <Folder Include="Emails\Command\Delete\" />
     <Folder Include="Emails\Queries\Find\" />
     <Folder Include="Emails\Queries\GetEmailList\" />
-    <Folder Include="Common\" />
     <Folder Include="People\Command\Delete\" />
     <Folder Include="People\Command\Edit\" />
     <Folder Include="People\Queries\Find\" />

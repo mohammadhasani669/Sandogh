@@ -1,9 +1,11 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Sandogh.Admin.EndPoint.Models.VIewModels.BankAccounts;
 using Sandogh.Application.BankAccounts.Command.Add;
 using Sandogh.Application.BankAccounts.Queries.GetAll;
 using Sandogh.Application.People.Repository;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Sandogh.Admin.EndPoint.Controllers
@@ -12,6 +14,7 @@ namespace Sandogh.Admin.EndPoint.Controllers
     {
         private readonly IMediator _mediator;
         private readonly IPerson _personService;
+        //private int pageSize = 2;
 
         public BankAccountsController(IMediator mediator, IPerson person)
         {
@@ -19,11 +22,31 @@ namespace Sandogh.Admin.EndPoint.Controllers
             _personService = person;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string search = "", int pageNumber = 1,int pageSize=10)
         {
-            GetAllBankAccountQuery  getAllBankAccountQuery = new GetAllBankAccountQuery();
-            var result = _mediator.Send(getAllBankAccountQuery).Result;
-            return View(result);
+            GetAllBankAccountQuery getAllBankAccountQuery = new GetAllBankAccountQuery()
+            {
+                pageSize = pageSize,
+                pageNumber = pageNumber,
+                Search = search
+            };
+            var PageSizeList = new List<SelectListItem>()
+            {
+                new SelectListItem(){ Text = "5"  ,Value = "5" },
+                new SelectListItem(){ Text = "10" ,Value = "10" },
+                new SelectListItem(){ Text = "20" ,Value = "20" },
+                new SelectListItem(){ Text = "25" ,Value = "25" },
+            };
+            var viewModel = new BankAccountListViewModel() 
+            {
+                Data = _mediator.Send(getAllBankAccountQuery).Result,
+                search = search,
+                PageSize = pageSize,
+                PageSizeOptions = PageSizeList
+            };
+          
+            
+            return View(viewModel);
         }
 
 
@@ -39,7 +62,7 @@ namespace Sandogh.Admin.EndPoint.Controllers
 
             return View(addBankAccountCommand);
         }
-        
+
 
         [HttpPost]
         public IActionResult Create(AddBankAccountCommand addBankAccountCommand)

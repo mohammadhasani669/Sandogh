@@ -1,26 +1,84 @@
-﻿@model IEnumerable<Sandogh.Domain.BankAccounts.BankAccount>
+﻿@model Sandogh.Admin.EndPoint.Models.VIewModels.BankAccounts.BankAccountListViewModel
+
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-4">
+                <h3 class="card-title" style="float:right">حساب های بانکی</h3>
+            </div>
+
+            <div class="col-4">
+                <form class="form-inline" asp-action="Index" asp-controller="BankAccounts"
+                      asp-route-pageNumber="@Model.Data.PageInfo.PageNumber">
+
+                    <div class="form-group mx-sm-3 mb-2">
+                        <input asp-for="search" class="form-control" placeholder="جستجو..." />
+                    </div>
+                    <button type="submit" class="btn btn-success mb-2">جستجو</button>
+               
+                </form>
+            </div>
+            <div class="col-4">
+                <select asp-for="PageSize" 
+                asp-items="Model.PageSizeOptions" 
+                onchange="changePageSize()"
+                id="DropDownPageSize"
+                class="form-control mx-sm-3 mb-3"></select>
+             
+            </div>
+
+        </div>
+    </div>
+    <div class="card-body">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>BankName</th>
+                    <th>AccountNumber</th>
+                    <th>CardNumber</th>
+                    <th>BankBranch</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Data.Data)
+                {
+                    <tr>
+                        <td>@item.BankName</td>
+                        <td>@item.AccountNumber</td>
+                        <td>@item.CardNumber</td>
+                        <td>@item.BankBranch</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer">
+        <div page-model="Model.Data.PageInfo"
+             page-action="Index"
+             page-classes-enabled="true"
+             page-class="btn"
+             page-class-normal=""
+             page-search="@Model.search"
+             page-class-selected="btn-success"></div>
+
+    </div>
+
+</div>
 
 
+<script>
+    function changePageSize()
+    {
+        debugger;
+       var selectedOption = document.getElementById("DropDownPageSize").value;
+       var url= window.location.href,
+           url = url.substring(0,url.indexOf("?")),
+           separator = (url.indexOf("?")===-1)?"?":"&",
+           newParam=separator + "pageSize="+ selectedOption;
+           newUrl=url.replace(newParam,"");
+           newUrl+=newParam;
+           window.location.href =newUrl;
+    }
+</script>
 
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>@Html.DisplayNameFor(m => m.BankName)</th>
-                <th>@Html.DisplayNameFor(m => m.AccountNumber)</th>
-                <th>@Html.DisplayNameFor(m => m.CardNumber)</th>
-                <th>@Html.DisplayNameFor(m => m.BankBranch)</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-           {
-               <tr>
-                   <td>@item.BankName</td>
-                   <td>@item.AccountNumber</td>
-                   <td>@item.CardNumber</td>
-                   <td>@item.BankBranch</td>
-               </tr>
-           }
-        </tbody>
-    </table>
 

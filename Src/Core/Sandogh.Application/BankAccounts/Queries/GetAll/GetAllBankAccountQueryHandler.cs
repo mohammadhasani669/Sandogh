@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Sandogh.Application.BankAccounts.Repository;
+using Sandogh.Application.Common;
 using Sandogh.Domain.BankAccounts;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Sandogh.Application.BankAccounts.Queries.GetAll
 {
-    public class GetAllBankAccountQueryHandler : RequestHandler<GetAllBankAccountQuery, IEnumerable<BankAccount>>
+    public class GetAllBankAccountQueryHandler : RequestHandler<GetAllBankAccountQuery, PagedData<BankAccount>>
     {
         private readonly IBankAccount _bankAccount;
 
@@ -18,9 +19,9 @@ namespace Sandogh.Application.BankAccounts.Queries.GetAll
             _bankAccount = bankAccount;
         }
 
-        protected override IEnumerable<BankAccount> Handle(GetAllBankAccountQuery request)
+        protected override PagedData<BankAccount> Handle(GetAllBankAccountQuery request)
         {
-            var list = _bankAccount.GetAll();
+            var list = _bankAccount.GetByPaging(request.pageNumber, request.pageSize,request.Search);
             return list;
         }
     }

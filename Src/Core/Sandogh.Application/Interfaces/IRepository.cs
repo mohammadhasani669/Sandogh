@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Sandogh.Application.Common;
 using Sandogh.Application.Interfaces.Contexts;
 using Sandogh.Domain.Common;
 using System;
@@ -24,9 +25,9 @@ namespace Sandogh.Application.Interfaces
     public class EfRepository<TEntity> : IRepository<TEntity> where TEntity : Entity, new()
     {
         protected readonly IDataBaseContext dbContext;
-       
 
-        public EfRepository(IDataBaseContext  dataBaseContext)
+
+        public EfRepository(IDataBaseContext dataBaseContext)
         {
             dbContext = dataBaseContext;
         }

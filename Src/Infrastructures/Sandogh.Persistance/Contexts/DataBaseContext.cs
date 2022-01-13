@@ -45,6 +45,36 @@ namespace Sandogh.Persistance.Contexts
 
             base.OnModelCreating(modelBuilder); 
         }
+
+        public override int SaveChanges()
+        {
+            var modifiedEntries = ChangeTracker.Entries()
+                .Where(p => p.State == EntityState.Modified ||
+                p.State == EntityState.Added ||
+                p.State == EntityState.Deleted
+                );
+            foreach (var item in modifiedEntries)
+            {
+                var entityType = item.Context.Model.FindEntityType(item.Entity.GetType());
+
+                if (item.State == EntityState.Added)
+                {
+                    
+                }
+                if (item.State == EntityState.Modified)
+                {
+                   
+                }
+
+                if (item.State == EntityState.Deleted)
+                {
+                  
+                    item.Property("IsRemoved").CurrentValue = true;
+                    item.State = EntityState.Modified;
+                }
+            }
+            return base.SaveChanges();
+        }
     }
 
     
