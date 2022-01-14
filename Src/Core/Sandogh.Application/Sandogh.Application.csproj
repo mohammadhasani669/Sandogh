@@ -17,12 +17,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="AdminMenus\Command\Edit\" />
+    <Folder Include="AdminMenus\Command\Delete\" />
+    <Folder Include="AdminMenus\Queries\GetAll\" />
     <Folder Include="BankAccounts\Queries\Find\" />
     <Folder Include="Common\" />
     <Folder Include="Emails\Command\Edit\" />
     <Folder Include="Emails\Command\Delete\" />
     <Folder Include="Emails\Queries\Find\" />
     <Folder Include="Emails\Queries\GetEmailList\" />
+    <Folder Include="Loans\Command\" />
+    <Folder Include="Loans\Queries\" />
     <Folder Include="People\Command\Delete\" />
     <Folder Include="People\Command\Edit\" />
     <Folder Include="People\Queries\Find\" />
