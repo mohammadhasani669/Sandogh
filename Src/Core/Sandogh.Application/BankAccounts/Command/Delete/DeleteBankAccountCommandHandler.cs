@@ -1,10 +1,6 @@
 ﻿using MediatR;
-using Sandogh.Application.BankAccounts.Repository;
-using System;
+using Sandogh.Domain.BankAccounts;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Sandogh.Application.BankAccounts.Command.Delete
 {

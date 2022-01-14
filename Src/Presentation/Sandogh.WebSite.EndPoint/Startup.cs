@@ -8,7 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Sandogh.Application.Emails;
 using Sandogh.Application.Interfaces.Contexts;
 using Sandogh.Application.Visitors.SaveVisitorInfo;
-using Sandogh.Infrastructure;
+using Sandogh.Common;
 using Sandogh.Infrastructure.IdentityConfigs;
 using Sandogh.Persistance.Contexts;
 using Sandogh.WebSite.EndPoint.Hubs;

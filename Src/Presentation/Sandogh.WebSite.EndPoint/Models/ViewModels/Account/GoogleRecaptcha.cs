@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json.Linq;
-using Sandogh.Infrastructure;
+using Sandogh.Common;
 using System.Net.Http;
 
 namespace Sandogh.WebSite.EndPoint.Models.ViewModels.Account

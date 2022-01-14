@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
-using Sandogh.Application.Common;
+using Sandogh.Common;
 using Sandogh.Domain.BankAccounts;
 using System.Collections.Generic;
 

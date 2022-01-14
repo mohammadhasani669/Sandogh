@@ -1,16 +1,10 @@
 ﻿using AutoMapper;
 using MediatR;
-using Sandogh.Application.BankAccounts.Repository;
 using Sandogh.Domain.BankAccounts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Sandogh.Application.BankAccounts.Command.Add
 {
-    public class AddBankAccountCommandHandler : RequestHandler<AddBankAccountCommand,int>
+    public class AddBankAccountCommandHandler : RequestHandler<AddBankAccountCommand, int>
     {
         private readonly IBankAccount _bankAccount;
         private readonly IMapper _mapper;

@@ -1,24 +1,20 @@
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Sandogh.Application.BankAccounts.Command.Add;
-using Sandogh.Application.BankAccounts.Repository;
 using Sandogh.Application.Emails;
 using Sandogh.Application.Interfaces.Contexts;
 using Sandogh.Application.People.Repository;
 using Sandogh.Application.Visitors.GetToDayReport;
+using Sandogh.Domain.BankAccounts;
 using Sandogh.Infrastructure.IdentityConfigs;
 using Sandogh.Infrastructure.MappingProfile;
 using Sandogh.Persistance.Contexts;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Sandogh.Admin.EndPoint
 {

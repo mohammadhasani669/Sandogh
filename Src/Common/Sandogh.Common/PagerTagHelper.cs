@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
-using Sandogh.Application.Common;
 
-namespace Sandogh.Infrastructure
+
+namespace Sandogh.Common
 {
     [HtmlTargetElement("div", Attributes = "page-model")]
 
@@ -35,7 +35,7 @@ namespace Sandogh.Infrastructure
             for (int i = 1; i <= PageModel.PageCount; i++)
             {
                 TagBuilder tag = new("a");
-                tag.Attributes["href"] = urlHelper.Action(PageAction, new { pageSize =PageModel.PageSize , search = PageSearch, pageNumber = i });
+                tag.Attributes["href"] = urlHelper.Action(PageAction, new { pageSize = PageModel.PageSize, search = PageSearch, pageNumber = i });
 
                 if (PageClassesEnabled)
                 {

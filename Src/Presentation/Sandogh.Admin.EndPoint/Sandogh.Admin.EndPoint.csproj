@@ -52,6 +52,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Common\Sandogh.Common\Sandogh.Common.csproj" />
     <ProjectReference Include="..\..\Core\Sandogh.Application\Sandogh.Application.csproj" />
     <ProjectReference Include="..\..\Infrastructures\Sandogh.Infrastructure\Sandogh.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Infrastructures\Sandogh.Persistance\Sandogh.Persistance.csproj" />

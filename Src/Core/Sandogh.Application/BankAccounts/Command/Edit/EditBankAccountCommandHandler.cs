@@ -1,11 +1,5 @@
 ﻿using MediatR;
-using Sandogh.Application.BankAccounts.Repository;
 using Sandogh.Domain.BankAccounts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Sandogh.Application.BankAccounts.Command.Edit
 {

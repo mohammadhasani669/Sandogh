@@ -2,9 +2,9 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Sandogh.Application.Emails;
+using Sandogh.Common;
 using Sandogh.Domain.Emails;
 using Sandogh.Domain.Users;
-using Sandogh.Infrastructure;
 using Sandogh.WebSite.EndPoint.Models.ViewModels.Account;
 using Sandogh.WebSite.EndPoint.Utilities.Convertors;
 using System.Security.Claims;

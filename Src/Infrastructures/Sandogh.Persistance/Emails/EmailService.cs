@@ -1,27 +1,17 @@
-﻿using Sandogh.Application.Interfaces;
-using Sandogh.Application.Interfaces.Contexts;
-using Sandogh.Domain.Emails;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Sandogh.Domain.Emails;
+using Sandogh.Persistance.Common;
+using Sandogh.Persistance.Contexts;
 using System.Net;
 using System.Net.Mail;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Sandogh.Application.Emails
 {
-    public interface IEmailService:IRepository<Email>
-    {
-        void Send(Email email,string password);
-       
-    }
-
     public class EmailService : EfRepository<Email>, IEmailService
     {
        
 
-        public EmailService(IDataBaseContext dbcontext):base(dbcontext)
+        public EmailService(DatabaseContext dbcontext):base(dbcontext)
         {
            
         }

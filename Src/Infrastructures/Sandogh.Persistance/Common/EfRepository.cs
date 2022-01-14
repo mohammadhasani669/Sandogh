@@ -1,33 +1,19 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Sandogh.Application.Common;
-using Sandogh.Application.Interfaces.Contexts;
+﻿using Sandogh.Application.Interfaces.Contexts;
 using Sandogh.Domain.Common;
+using Sandogh.Persistance.Contexts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Sandogh.Application.Interfaces
+namespace Sandogh.Persistance.Common
 {
-    public interface IRepository<TEntity> where TEntity : Entity, new()
-    {
-        void Insert(TEntity entity);
-        void Remove(TEntity entity);
-        void Update(TEntity entity);
-        int SaveChanges();
-        TEntity Get(int id);
-        IEnumerable<TEntity> GetAll();
-        bool Exists(Expression<Func<TEntity, bool>> expression);
-    }
-
     public class EfRepository<TEntity> : IRepository<TEntity> where TEntity : Entity, new()
     {
-        protected readonly IDataBaseContext dbContext;
+        protected readonly DatabaseContext dbContext;
 
 
-        public EfRepository(IDataBaseContext dataBaseContext)
+        public EfRepository(DatabaseContext dataBaseContext)
         {
             dbContext = dataBaseContext;
         }

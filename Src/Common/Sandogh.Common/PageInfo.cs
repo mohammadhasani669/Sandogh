@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Sandogh.Application.Common
+namespace Sandogh.Common
 {
     public class PageInfo
     {

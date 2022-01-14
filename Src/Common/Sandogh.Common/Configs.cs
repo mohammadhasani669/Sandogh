@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sandogh.Infrastructure
+namespace Sandogh.Common
 {
     public class Configs
     {
@@ -15,7 +15,7 @@ namespace Sandogh.Infrastructure
         public string GoogleRecaptchaSecretKey { get; set; }
         public string GoogleRecaptchaSitekey { get; set; }
 
-      
+
 
     }
 }

@@ -1,24 +1,15 @@
-﻿using Sandogh.Application.Common;
-using Sandogh.Application.Interfaces;
-using Sandogh.Application.Interfaces.Contexts;
-using Sandogh.Domain.BankAccounts;
+﻿using Sandogh.Common;
+using Sandogh.Persistance.Common;
+using Sandogh.Persistance.Contexts;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Sandogh.Application.BankAccounts.Repository
+namespace Sandogh.Domain.BankAccounts
 {
-    public interface IBankAccount : IRepository<BankAccount>
-    {
-        PagedData<BankAccount> GetByPaging(int pageNumber, int pageSize, string search);
-    }
-
     public class BankAccountService : EfRepository<BankAccount>, IBankAccount
     {
-        private readonly IDataBaseContext _context;
-        public BankAccountService(IDataBaseContext dataBaseContext) : base(dataBaseContext)
+        private readonly DatabaseContext _context;
+        public BankAccountService(DatabaseContext dataBaseContext) : base(dataBaseContext)
         {
             _context = dataBaseContext;
         }
