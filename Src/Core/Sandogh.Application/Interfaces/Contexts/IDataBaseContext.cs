@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
+using Sandogh.Domain.AdminMenu;
 using Sandogh.Domain.BankAccounts;
 using Sandogh.Domain.BankProfits;
 using Sandogh.Domain.BlackLists;
@@ -23,7 +24,7 @@ namespace Sandogh.Application.Interfaces.Contexts
     public interface IDataBaseContext
     {
 
-        public DbSet<BankAccount> bankAccounts { get; set; }
+        public DbSet<BankAccount> BankAccounts { get; set; }
         public DbSet<BankProfit> BankProfits { get; set; }
         public DbSet<BlackList> BlackLists { get; set; }
         public DbSet<Email> Emails { get; set; }
@@ -32,6 +33,7 @@ namespace Sandogh.Application.Interfaces.Contexts
         public DbSet<OperationsLog> OperationsLogs { get; set; }
         public DbSet<Person> People { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
+        public DbSet<AdminMenu> AdminMenus { get; set; }
 
         int SaveChanges();
         int SaveChanges(bool acceptAllChangesOnSuccess);

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Sandogh.Persistance.Contexts;
 
 namespace Sandogh.Persistance.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20220114133126_AdminMenu")]
+    partial class AdminMenu
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,7 +47,7 @@ namespace Sandogh.Persistance.Migrations
 
                     b.HasIndex("AdminMenuId");
 
-                    b.ToTable("AdminMenus");
+                    b.ToTable("adminMenus");
                 });
 
             modelBuilder.Entity("Sandogh.Domain.BankAccounts.BankAccount", b =>
@@ -81,7 +83,7 @@ namespace Sandogh.Persistance.Migrations
 
                     b.HasIndex("PersonID");
 
-                    b.ToTable("BankAccounts");
+                    b.ToTable("bankAccounts");
                 });
 
             modelBuilder.Entity("Sandogh.Domain.BankProfits.BankProfit", b =>

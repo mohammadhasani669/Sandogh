@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Sandogh.Application.Interfaces.Contexts;
+using Sandogh.Domain.AdminMenu;
 using Sandogh.Domain.BankAccounts;
 using Sandogh.Domain.BankProfits;
 using Sandogh.Domain.BlackLists;
@@ -26,7 +27,7 @@ namespace Sandogh.Persistance.Contexts
         {
         }
         
-        public DbSet<BankAccount> bankAccounts { get; set; }
+        public DbSet<BankAccount> BankAccounts { get; set; }
         public DbSet<BankProfit> BankProfits { get; set; }
         public DbSet<BlackList> BlackLists { get; set; }
         public DbSet<Email> Emails { get; set; }
@@ -35,6 +36,7 @@ namespace Sandogh.Persistance.Contexts
         public DbSet<OperationsLog> OperationsLogs { get; set; }
         public DbSet<Person> People { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
+        public DbSet<AdminMenu> AdminMenus { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

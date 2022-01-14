@@ -25,7 +25,7 @@ namespace Sandogh.Domain.BankAccounts
                 }
             };
 
-            result.Data = _context.bankAccounts
+            result.Data = _context.BankAccounts
                 .Where(x => x.BankBranch.Contains(search) || string.IsNullOrWhiteSpace(search))
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize).ToList();
@@ -34,13 +34,13 @@ namespace Sandogh.Domain.BankAccounts
             {
                 result.PageInfo.PageNumber = 1;
 
-                result.Data = _context.bankAccounts
+                result.Data = _context.BankAccounts
                .Where(x => x.BankBranch.Contains(search) || string.IsNullOrWhiteSpace(search))
                .Skip((1 - 1) * pageSize)
                .Take(pageSize).ToList();
             }
 
-            result.PageInfo.TotalCount = _context.bankAccounts
+            result.PageInfo.TotalCount = _context.BankAccounts
                 .Where(x => x.BankBranch.Contains(search) || string.IsNullOrWhiteSpace(search)).Count();
             return result;
         }
