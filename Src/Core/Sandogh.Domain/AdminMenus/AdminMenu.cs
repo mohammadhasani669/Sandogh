@@ -7,6 +7,7 @@ namespace Sandogh.Domain.AdminMenu
     {
         public string Name { get; set; }
         public int? ParentId { get; set; }
+     
         public List<AdminMenu> SubMenu { get; set; }
     }
 }

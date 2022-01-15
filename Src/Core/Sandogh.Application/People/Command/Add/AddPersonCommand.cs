@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Sandogh.Application.People.Command.Add
 {
-    internal class AddPersonCommand
+    public class AddPersonCommand
     {
     }
 }

@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="11.0.0" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="10.3.6" />
     <PackageReference Include="MediatR" Version="10.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.13" />
@@ -31,6 +32,9 @@
     <Folder Include="People\Command\Delete\" />
     <Folder Include="People\Command\Edit\" />
     <Folder Include="People\Queries\Find\" />
+    <Folder Include="Products\Command\Edit\" />
+    <Folder Include="Products\Command\Delete\" />
+    <Folder Include="Products\Queries\" />
   </ItemGroup>
 
 </Project>

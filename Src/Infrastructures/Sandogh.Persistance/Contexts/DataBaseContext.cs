@@ -9,14 +9,9 @@ using Sandogh.Domain.LoanRepayments;
 using Sandogh.Domain.Loans;
 using Sandogh.Domain.Logs;
 using Sandogh.Domain.People;
+using Sandogh.Domain.Products;
 using Sandogh.Domain.Transactions;
-using Sandogh.Domain.Users;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 
 namespace Sandogh.Persistance.Contexts
@@ -38,6 +33,14 @@ namespace Sandogh.Persistance.Contexts
         public DbSet<Transaction> Transactions { get; set; }
         public DbSet<AdminMenu> AdminMenus { get; set; }
 
+        public DbSet<Product> Products { get; set; }
+        public DbSet<ProductBrand> ProductBrands { get; set; }
+        public DbSet<ProductCategory> ProductCategories { get; set; }
+        public DbSet<ProductFeature> ProductFeatures { get; set; }
+        public DbSet<ProductImage> ProductImages { get; set; }
+        public DbSet<ProductSize> ProductSizes { get; set; }
+
+        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
