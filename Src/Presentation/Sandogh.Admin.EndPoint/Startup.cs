@@ -10,10 +10,18 @@ using Sandogh.Application.Emails;
 using Sandogh.Application.Interfaces.Contexts;
 using Sandogh.Application.People.Repository;
 using Sandogh.Application.Visitors.GetToDayReport;
+using Sandogh.Domain.AdminMenu;
 using Sandogh.Domain.BankAccounts;
+using Sandogh.Domain.Loans;
+using Sandogh.Domain.Products;
+using Sandogh.Domain.Transactions;
 using Sandogh.Infrastructure.IdentityConfigs;
 using Sandogh.Infrastructure.MappingProfile;
+using Sandogh.Persistance.AdminMenus;
 using Sandogh.Persistance.Contexts;
+using Sandogh.Persistance.Loans;
+using Sandogh.Persistance.Products;
+using Sandogh.Persistance.Transactions;
 using System;
 
 namespace Sandogh.Admin.EndPoint
@@ -57,6 +65,16 @@ namespace Sandogh.Admin.EndPoint
             services.AddTransient<IPerson, PersonService>();
             services.AddTransient<IBankAccount, BankAccountService>();
             services.AddTransient<IEmailService, EmailService>();
+            services.AddTransient<IAdminMenu, AdminMenuService>();
+            services.AddTransient<ILoan, LoanService>();
+            services.AddTransient<IProduct, ProductService>();
+            services.AddTransient<IProductBrand, ProductBrandService>();
+            services.AddTransient<IProductCategory, ProductCategoryService>();
+            services.AddTransient<IProductFeature, ProductFeatureService>();
+            services.AddTransient<IProductImage, ProductImageService>();
+            services.AddTransient<IProductSize, ProductSizeService>();
+            services.AddTransient<ITransaction, TransactionService>();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

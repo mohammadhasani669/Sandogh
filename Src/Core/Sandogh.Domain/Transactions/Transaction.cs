@@ -17,6 +17,6 @@ namespace Sandogh.Domain.Transactions
         public string Description { get; set; }
         public bool depositOrWithdraw { get; set; }
 
-        public virtual Person Person { get; set; }
+        public  Person Person { get; set; }
     }
 }
