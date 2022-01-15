@@ -19,7 +19,6 @@ namespace Sandogh.Application.BankAccounts.Command.Add
         {
             var bankAccount = _mapper.Map<BankAccount>(request);
             _bankAccount.Insert(bankAccount);
-            _bankAccount.SaveChanges();
             return bankAccount.Id;
         }
     }

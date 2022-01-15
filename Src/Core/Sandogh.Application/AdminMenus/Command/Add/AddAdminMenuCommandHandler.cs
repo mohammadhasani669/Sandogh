@@ -19,7 +19,6 @@ namespace Sandogh.Application.AdminMenus.Command.Add
         {
             var AdminMenu = _mapper.Map<AdminMenu>(request);
             _adminMenu.Insert(AdminMenu);
-            var result = _adminMenu.SaveChanges();
             return AdminMenu.Id;
         }
     }

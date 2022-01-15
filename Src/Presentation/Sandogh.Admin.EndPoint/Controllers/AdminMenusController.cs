@@ -26,6 +26,7 @@ namespace Sandogh.Admin.EndPoint.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Create(AddAdminMenuCommand addAdminMenuCommand)
         {
             var result = _mediator.Send(addAdminMenuCommand);

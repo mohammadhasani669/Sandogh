@@ -65,13 +65,12 @@ namespace Sandogh.Admin.EndPoint.Controllers
 
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Create(AddBankAccountCommand addBankAccountCommand)
         {
             _mediator.Send(addBankAccountCommand);
 
             return RedirectToAction(nameof(Index));
         }
-
-
     }
 }

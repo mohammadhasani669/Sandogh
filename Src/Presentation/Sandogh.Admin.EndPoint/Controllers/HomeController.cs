@@ -69,8 +69,6 @@ namespace Sandogh.Admin.EndPoint.Controllers
                     }
                 }
             }
-          
-            
         }
 
         public IActionResult Privacy()
