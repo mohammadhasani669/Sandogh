@@ -29,14 +29,19 @@
     <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.2.1/css/bootstrap.min.css">
     <!-- Custom style for RTL -->
     <link rel="stylesheet" href="~/theme/dist/css/custom.css">
+    <style>
+        .card-title {
+            float: right;
+        }
+    </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
 
-        @await Component.InvokeAsync("NavBarVC") 
-        @await Component.InvokeAsync("SidebarVC") 
+        @await Component.InvokeAsync("NavBarVC")
+        @await Component.InvokeAsync("SidebarVC")
 
-      
+
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
@@ -97,7 +102,7 @@
 
     <!-- Sparkline -->
     <script src="~/theme/plugins/sparklines/sparkline.js"></script>
-   
+
     <!-- jQuery Knob Chart -->
     <script src="~/theme/plugins/jquery-knob/jquery.knob.min.js"></script>
     <!-- daterangepicker -->

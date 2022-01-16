@@ -11,8 +11,15 @@ namespace Sandogh.Persistance.Products
 {
     public class ProductSizeService : EfRepository<ProductSize>, IProductSize
     {
+        private readonly DatabaseContext _context;
         public ProductSizeService(DatabaseContext dataBaseContext) : base(dataBaseContext)
         {
+            _context = dataBaseContext;
+        }
+
+        public IEnumerable<ProductSize> GetAllForDDL()
+        {
+            return _context.ProductSizes.Select(x => new ProductSize { Id = x.Id, Name = x.Name }).ToList();
         }
     }
 }

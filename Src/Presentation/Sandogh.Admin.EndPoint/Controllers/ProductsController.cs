@@ -28,10 +28,9 @@ namespace Sandogh.Admin.EndPoint.Controllers
 
         public IActionResult Create()
         {
-           
-            ViewBag.Brand_ddl = new SelectList(_productBrand.GetAll(), "Name", "Id");
-            ViewBag.ProductCategory_ddl = new SelectList(_productCategory.GetAll(), "Name", "Id");
-            ViewBag.ProductSize = new SelectList(_productSize.GetAll(), "Name", "Id");
+            ViewBag.Brands_ddl = new SelectList(_productBrand.GetAllForDDL(), "Id", "Name");
+            ViewBag.ProductCategory_ddl = new SelectList(_productCategory.GetAllForDDL(), "Id", "Name");
+            ViewBag.ProductSizees_ddl = new SelectList(_productSize.GetAllForDDL(), "Id", "Name");
           
             return View();
         }

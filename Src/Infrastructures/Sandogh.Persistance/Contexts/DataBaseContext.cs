@@ -4,6 +4,7 @@ using Sandogh.Domain.AdminMenu;
 using Sandogh.Domain.BankAccounts;
 using Sandogh.Domain.BankProfits;
 using Sandogh.Domain.BlackLists;
+using Sandogh.Domain.Common;
 using Sandogh.Domain.Emails;
 using Sandogh.Domain.LoanRepayments;
 using Sandogh.Domain.Loans;
@@ -46,7 +47,7 @@ namespace Sandogh.Persistance.Contexts
         {
 
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(DatabaseContext).Assembly);
-
+            modelBuilder.Entity<ProductBrand>().HasQueryFilter(x => !x.IsRemoved);
 
             base.OnModelCreating(modelBuilder); 
         }

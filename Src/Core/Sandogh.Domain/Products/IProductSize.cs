@@ -9,5 +9,6 @@ namespace Sandogh.Domain.Products
 {
     public interface IProductSize : IRepository<ProductSize>
     {
+        IEnumerable<ProductSize> GetAllForDDL();
     }
 }

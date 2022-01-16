@@ -34,6 +34,7 @@ namespace Sandogh.Persistance.Common
             return dbContext.Set<TEntity>().ToList();
         }
 
+       
         public void Insert(TEntity entity)
         {
             dbContext.Set<TEntity>().Add(entity);

@@ -11,8 +11,15 @@ namespace Sandogh.Persistance.Products
 {
     public class ProductBrandService : EfRepository<ProductBrand>, IProductBrand
     {
+        private readonly DatabaseContext _context;
         public ProductBrandService(DatabaseContext dataBaseContext) : base(dataBaseContext)
         {
+            _context = dataBaseContext;
+        }
+
+        public IEnumerable<ProductBrand> GetAllForDDL()
+        {
+            return _context.ProductBrands.Select(x => new ProductBrand{ Id = x.Id, Name= x.Name }).ToList();
         }
     }
 }

@@ -5,85 +5,155 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Create</h1>
 
-<h4>AddProductCommand</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+<div class="card">
+    <div class="card-header">
+        <div class="card-title bar-success">ثبت محصول</div>
+    </div>
+    <div class="card-body">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+            <div class="row">
+                <div class="col-xl-3 col-lg-6 col-md-12 mb-1">
+                    <fieldset>
+                        <div class="form-group">
+                            <label asp-for="Name" class="control-label">نام محصول</label>
+                            <input asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="col-xl-3 col-lg-6 col-md-12 mb-1">
+                    <fieldset>
+                        <div class="form-group">
+                            <label asp-for="Price" class="control-label">مبلغ</label>
+                            <input asp-for="Price" class="form-control" />
+                            <span asp-validation-for="Price" class="text-danger"></span>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="col-xl-3 col-lg-6 col-md-12 mb-1">
+                    <fieldset>
+                        <div class="form-group">
+                            <label asp-for="AvailableStock" class="control-label">موجودی انبار</label>
+                            <input asp-for="AvailableStock" class="form-control" />
+                            <span asp-validation-for="AvailableStock" class="text-danger"></span>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="col-xl-3 col-lg-6 col-md-12 mb-1">
+                    <fieldset>
+                        <div class="form-group">
+                            <label asp-for="RestockThreshold" class="control-label"></label>
+                            <input asp-for="RestockThreshold" class="form-control" />
+                            <span asp-validation-for="RestockThreshold" class="text-danger"></span>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xl-3 col-lg-6 col-md-12 mb-1">
+                    <fieldset>
+                        <div class="form-group">
+                            <label asp-for="BrandId" class="control-label">برند محصول</label>
+                            <select asp-for="BrandId" asp-items="ViewBag.Brands_ddl" class="form-control" ></select>
+                            <span asp-validation-for="BrandId" class="text-danger"></span>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="col-xl-3 col-lg-6 col-md-12 mb-1">
+                    <fieldset>
+                        <div class="form-group">
+                            <label asp-for="MaxStockThreshold" class="control-label">حداکثر موجودی</label>
+                            <input asp-for="MaxStockThreshold" class="form-control" />
+                            <span asp-validation-for="MaxStockThreshold" class="text-danger"></span>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="col-xl-3 col-lg-6 col-md-12 mb-1">
+                    <fieldset>
+                        <div class="form-group">
+                            <label asp-for="SizeId" class="control-label">سایز</label>
+                            <select asp-for="SizeId" asp-items="ViewBag.ProductSizees_ddl" class="form-control" ></select>
+                            <span asp-validation-for="SizeId" class="text-danger"></span>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="col-xl-3 col-lg-6 col-md-12 mb-1">
+                    <fieldset>
+                        <div class="form-group">
+                            <label asp-for="ProductCategoryId" class="control-label">دسته محصول</label>
+                            <select asp-for="ProductCategoryId" asp-items="ViewBag.ProductCategory_ddl" class="form-control"></select>
+                            <span asp-validation-for="ProductCategoryId" class="text-danger"></span>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xl-3 col-lg-6 col-md-12 mb-1">
+                    <fieldset>
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="Enable" /> فعال
+                            </label>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="col-xl-3 col-lg-6 col-md-12 mb-1">
+                    <fieldset>
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="HasSize" /> سایز دارد؟
+                            </label>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="col-xl-3 col-lg-6 col-md-12 mb-1">
+                    <fieldset>
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="HasColor" /> رنگ دارد؟
+                            </label>
+                        </div>
+                    </fieldset>
+                </div>
+               
+            </div>
+            <div class="row">
+                <div class="col-12">
+                       <fieldset>
+                        <div class="form-group">
+                            <label asp-for="Description" class="control-label">توضیحات</label>
+                            <textarea id="Description" asp-for="Description" class="form-control" rows=5></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                    </fieldset>
+                </div>
             </div>
             <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Price" class="control-label"></label>
-                <input asp-for="Price" class="form-control" />
-                <span asp-validation-for="Price" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AvailableStock" class="control-label"></label>
-                <input asp-for="AvailableStock" class="form-control" />
-                <span asp-validation-for="AvailableStock" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="RestockThreshold" class="control-label"></label>
-                <input asp-for="RestockThreshold" class="form-control" />
-                <span asp-validation-for="RestockThreshold" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MaxStockThreshold" class="control-label"></label>
-                <input asp-for="MaxStockThreshold" class="form-control" />
-                <span asp-validation-for="MaxStockThreshold" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Enable" /> @Html.DisplayNameFor(model => model.Enable)
-                </label>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="HasSize" /> @Html.DisplayNameFor(model => model.HasSize)
-                </label>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="HasColor" /> @Html.DisplayNameFor(model => model.HasColor)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="ProductCategoryId" class="control-label"></label>
-                <select asp-for="ProductCategoryId" asp-items="ViewBag.ProductCategory_ddl"></select>
-                <span asp-validation-for="ProductCategoryId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SizeId" class="control-label"></label>
-                <input asp-for="SizeId" class="form-control" />
-                <span asp-validation-for="SizeId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="BrandId" class="control-label"></label>
-                <input asp-for="BrandId" class="form-control" />
-                <span asp-validation-for="BrandId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="ثبت محصول" class="btn btn-primary" />
+
+                <a class="btn btn-warning" asp-action="Index">لیست محصولات</a>
+
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+        @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script src="https://cdn.ckeditor.com/4.13.0/standard-all/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace('Description', {
+            language: 'fa',
+            contentsLangDirection: 'rtl',
+            height: 270,
+        });
+    </script>
 }
+
+
+

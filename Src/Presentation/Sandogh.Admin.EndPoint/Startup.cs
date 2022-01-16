@@ -1,3 +1,5 @@
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -9,6 +11,7 @@ using Sandogh.Application.BankAccounts.Command.Add;
 using Sandogh.Application.Emails;
 using Sandogh.Application.Interfaces.Contexts;
 using Sandogh.Application.People.Repository;
+using Sandogh.Application.Products.Command.Add;
 using Sandogh.Application.Visitors.GetToDayReport;
 using Sandogh.Domain.AdminMenu;
 using Sandogh.Domain.BankAccounts;
@@ -38,7 +41,7 @@ namespace Sandogh.Admin.EndPoint
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<AddProductCommand>()); ;
 
             services.AddDbContext<DatabaseContext>(option => option.UseSqlServer(Configuration.GetConnectionString("SqlServer")));
             services.AddTransient<IDataBaseContext, DatabaseContext>();
@@ -51,10 +54,9 @@ namespace Sandogh.Admin.EndPoint
                 option.AccessDeniedPath = "/Account/AccessDenied";
                 option.SlidingExpiration = true;
             });
-            //Add MediatR
-            services.AddMediatR(typeof(AddBankAccountCommand).Assembly);
+            
 
-            services.AddAutoMapper(typeof(BankAccountMappingProfile));
+            
 
             services.AddAuthentication();
 
@@ -74,7 +76,18 @@ namespace Sandogh.Admin.EndPoint
             services.AddTransient<IProductImage, ProductImageService>();
             services.AddTransient<IProductSize, ProductSizeService>();
             services.AddTransient<ITransaction, TransactionService>();
-            
+
+
+            //Add MediatR
+            services.AddMediatR(typeof(AddBankAccountCommand).Assembly);
+          
+
+
+            //mapper
+            services.AddAutoMapper(typeof(BankAccountMappingProfile));
+
+         
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
