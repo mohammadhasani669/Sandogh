@@ -20,16 +20,16 @@ namespace Sandogh.Domain.Products
         public bool HasColor { get; set; }
 
         public int ProductCategoryId { get; set; }
-        public ProductCategory productCategory { get; set; }
+        public ProductCategory Category { get; set; }
 
         public int? SizeId { get; set; }
-        public ProductSize ProductSize { get; set; }
+        public ProductSize Size { get; set; }
 
         public int BrandId { get; set; }
         public ProductBrand ProductBrand { get; set; }
 
-        public ICollection<ProductImage> ProductImages { get; set; }
-        public ICollection<ProductFeature>  ProductFeatures { get; set; }
+        public ICollection<ProductImage> Images { get; set; }
+        public ICollection<ProductFeature>  Features { get; set; }
      
     }
 }

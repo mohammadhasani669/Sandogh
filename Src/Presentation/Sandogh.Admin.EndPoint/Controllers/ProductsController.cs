@@ -42,7 +42,7 @@ namespace Sandogh.Admin.EndPoint.Controllers
         public IActionResult Create(AddProductCommand addProductCommand,IList<IFormFile> files)
         {
             var result = _mediator.Send(addProductCommand);
-            return View();
+            return new JsonResult("Ok");
         }
     }
 }
