@@ -1,8 +1,10 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Sandogh.Application.Products.Command.Add;
 using Sandogh.Domain.Products;
+using System.Collections.Generic;
 
 namespace Sandogh.Admin.EndPoint.Controllers
 {
@@ -36,7 +38,8 @@ namespace Sandogh.Admin.EndPoint.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(AddProductCommand addProductCommand)
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(AddProductCommand addProductCommand,IList<IFormFile> files)
         {
             var result = _mediator.Send(addProductCommand);
             return View();

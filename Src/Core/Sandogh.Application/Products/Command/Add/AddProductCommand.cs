@@ -1,9 +1,11 @@
 ﻿using MediatR;
+using Sandogh.Domain.Products;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 
 namespace Sandogh.Application.Products.Command.Add
 {
@@ -21,5 +23,7 @@ namespace Sandogh.Application.Products.Command.Add
         public int ProductCategoryId { get; set; }
         public int? SizeId { get; set; }
         public int BrandId { get; set; }
+        public List<ProductImage> Images { get; set; }
+        public List<ProductFeature> Features { get; set; }
     }
 }

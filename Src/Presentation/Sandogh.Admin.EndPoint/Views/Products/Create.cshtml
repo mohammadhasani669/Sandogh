@@ -11,7 +11,7 @@
         <div class="card-title bar-success">ثبت محصول</div>
     </div>
     <div class="card-body">
-        <form asp-action="Create">
+        <form asp-action="Create" id="createForm" class="form" onsubmit="return sendDataToServer(event)">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="row">
                 <div class="col-xl-3 col-lg-6 col-md-12 mb-1">
@@ -57,7 +57,7 @@
                     <fieldset>
                         <div class="form-group">
                             <label asp-for="BrandId" class="control-label">برند محصول</label>
-                            <select asp-for="BrandId" asp-items="ViewBag.Brands_ddl" class="form-control" ></select>
+                            <select asp-for="BrandId" id="BrandId" asp-items="ViewBag.Brands_ddl" class="form-control" ></select>
                             <span asp-validation-for="BrandId" class="text-danger"></span>
                         </div>
                     </fieldset>
@@ -84,7 +84,7 @@
                     <fieldset>
                         <div class="form-group">
                             <label asp-for="ProductCategoryId" class="control-label">دسته محصول</label>
-                            <select asp-for="ProductCategoryId" asp-items="ViewBag.ProductCategory_ddl" class="form-control"></select>
+                            <select asp-for="ProductCategoryId" id="ProductCategoryId" asp-items="ViewBag.ProductCategory_ddl" class="form-control"></select>
                             <span asp-validation-for="ProductCategoryId" class="text-danger"></span>
                         </div>
                     </fieldset>
@@ -119,14 +119,70 @@
                         </div>
                     </fieldset>
                 </div>
-               
+                <div class="col-xl-3 col-lg-6 col-md-12 mb-1">
+                                <fieldset class="form-group">
+                                    <label for="basicInput">تصاویر </label>
+                                    <input type="file" multiple class="form-control" accept="image/*" id="Images">
+                                </fieldset>
+               </div>
+              
             </div>
+              <hr />
+                        <div class="card col-md-12">
+                            <div class="card-header col-md-12 row">
+                                <div class="col-xl-2 col-lg-6 col-md-12 mb-1">
+                                    <fieldset class="form-group">
+                                        <label for="basicInput"> نام گروه </label>
+                                        <input type="text" class="form-control" id="txtGroup" placeholder="نام گروه" />
+                                    </fieldset>
+                                </div>
+                                <div class="col-xl-2 col-lg-6 col-md-12 mb-1">
+                                    <fieldset class="form-group">
+                                        <label for="basicInput"> نام ویژگی </label>
+                                        <input type="text" class="form-control" id="txtDisplayName" placeholder="نام ویژگی" />
+                                    </fieldset>
+                                </div>
+                                <div class="col-xl-2 col-lg-6 col-md-12 mb-1">
+                                    <fieldset class="form-group">
+                                        <label for="basicInput"> مقدار ویژگی </label>
+                                        <input type="text" class="form-control" id="txtValue" placeholder="مقدار ویژگی" />
+                                    </fieldset>
+                                </div>
+                                <div class="col-xl-2 col-lg-6 col-md-12 mb-1">
+                                    <fieldset class="form-group">
+                                        <br />
+                                        <a class="btn btn-success text-white mt-2" id="btnAddFeatures">افزودن</a>
+                                    </fieldset>
+                                </div>
+                            </div>
+                            <div class="card-body col-md-12">
+                                <table id="tbl_Features" class="col-md-12 table table-bordered table-hover  table-condensed table-responsive">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                گروه
+                                            </th>
+                                            <th>
+                                                نام ویژگی
+                                            </th>
+                                            <th>
+                                                مقدار ویژگی
+                                            </th>
+                                            <th>
+
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
             <div class="row">
                 <div class="col-12">
                        <fieldset>
                         <div class="form-group">
                             <label asp-for="Description" class="control-label">توضیحات</label>
-                            <textarea id="Description" asp-for="Description" class="form-control" rows=5></textarea>
+                            <textarea id="Description" name="Description" asp-for="Description" class="form-control" rows=5></textarea>
                             <span asp-validation-for="Description" class="text-danger"></span>
                         </div>
                     </fieldset>
@@ -143,6 +199,10 @@
 </div>
 
 @section Scripts {
+
+     <link href="~/Sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+    <script src="~/Sweetalert2/sweetalert2.min.js"></script>
+
         @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
     <script src="https://cdn.ckeditor.com/4.13.0/standard-all/ckeditor.js"></script>
@@ -152,6 +212,121 @@
             contentsLangDirection: 'rtl',
             height: 270,
         });
+    </script>
+     <script>
+
+        $("#btnAddFeatures").on("click", function () {
+            var txtDisplayName = $("#txtDisplayName").val();
+            var txtValue = $("#txtValue").val();
+            var txtGroup = $("#txtGroup").val();
+
+            if (txtDisplayName == "" || txtValue == "" || txtGroup == "") {
+                swal.fire(
+                    'هشدار!',
+                    "نام گروه - نام ویزگی و مقدار اجباری هستند",
+                    'warning'
+                );
+            }
+            else {
+                $('#tbl_Features tbody').append('<tr><td>' + txtGroup + '</td>  <td>' + txtDisplayName + '</td>  <td>' + txtValue + '</td> <td> <a class="idFeatures btnDelete btn btn-danger"> حذف </a> </td> </tr>');
+                $("#txtDisplayName").val('');
+                $("#txtValue").val('');
+            }
+        });
+
+        $("#tbl_Features").on('click', '.idFeatures', function () {
+            $(this).closest('tr').remove();
+        });
+
+        function sendDataToServer(e) {
+           
+            e.preventDefault();
+            var form = $("#createForm");
+            form.validate();
+            if (form.valid() == false) {
+                swal.fire(
+                    'هشدار!',
+                    "اطلاعات فرم به درستی وارد نشده است!",
+                    'warning'
+                );
+                return false;
+            }
+
+            var data = new FormData();
+            //دریافت مقادیر از تکس باکس ها و....
+            data.append("Name", $("#Name").val());
+            data.append("AvailableStock", $("#AvailableStock").val());
+            data.append("RestockThreshold", $("#RestockThreshold").val());
+            data.append("MaxStockThreshold", $("#MaxStockThreshold").val());
+            data.append("Price", $("#Price").val());
+            data.append("Description", CKEDITOR.instances['Description'].getData());
+
+            data.append("ProductCategoryId", $('#ProductCategoryId').find('option:selected').val());
+            data.append("BrandId", $('#BrandId').find('option:selected').val());
+            data.append("SizeId", $('#SizeId').find('option:selected').val());
+
+            //دریافت عکس های انتخاب شده توسط کاربر و قرار دادن عکس ها در متغیر data
+            var productImages = document.getElementById("Images");
+            if (productImages.files.length > 0) {
+                for (var i = 0; i < productImages.files.length; i++) {
+                    data.append('files', productImages.files[i]);
+                }
+            }
+
+            //دریافت ویژگی های محصول از جدول
+            var dataFeaturesViewModel = $('#tbl_Features tr:gt(0)').map(function () {
+                return {
+                    Group: $(this.cells[0]).text(),
+                    DisplayName: $(this.cells[1]).text(),
+                    Value: $(this.cells[2]).text(),
+                };
+            }).get();
+
+            $.each(dataFeaturesViewModel, function (i, val) {
+                data.append('Features[' + i + '].Group', val.Group);
+                data.append('Features[' + i + '].DisplayName', val.DisplayName);
+                data.append('Features[' + i + '].Value', val.Value);
+            });
+            var ajaxRequest = $.ajax({
+                type: "POST",
+                url: "@Url.Action("Create","Products")",
+                contentType: false,
+                processData: false,
+                data: data,
+                headers: { "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val() },
+                success: function (data) {
+                    if (data.isSuccess == true) {
+                        swal.fire(
+                            'موفق!',
+                            'کاتالوگ با موفقیت ثبت شد',
+                            'success'
+                        ).then(function (isConfirm) {
+                            window.location.href = "/catalogitems";
+                        });
+                    }
+                    else {
+                        swal.fire(
+                            'هشدار!',
+                             "دیتا ثبت نشد",
+                            'warning'
+                        );
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status);
+                    alert(thrownError);
+                }
+            });
+
+            ajaxRequest.done(function (xhr, textStatus) {
+                // Do other operation
+            });
+ 
+        }
+
+            
+
+
     </script>
 }
 
