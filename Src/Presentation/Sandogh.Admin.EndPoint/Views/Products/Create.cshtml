@@ -277,14 +277,14 @@
             var dataFeaturesViewModel = $('#tbl_Features tr:gt(0)').map(function () {
                 return {
                     Group: $(this.cells[0]).text(),
-                    DisplayName: $(this.cells[1]).text(),
+                    Key: $(this.cells[1]).text(),
                     Value: $(this.cells[2]).text(),
                 };
             }).get();
 
             $.each(dataFeaturesViewModel, function (i, val) {
                 data.append('Features[' + i + '].Group', val.Group);
-                data.append('Features[' + i + '].DisplayName', val.DisplayName);
+                data.append('Features[' + i + '].Key', val.Key);
                 data.append('Features[' + i + '].Value', val.Value);
             });
             var ajaxRequest = $.ajax({
