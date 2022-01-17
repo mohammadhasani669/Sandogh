@@ -21,6 +21,7 @@ namespace Sandogh.Admin.EndPoint.Controllers
             _productBrand = productBrand;
             _productCategory = productCategory;
             _productSize = productSize;
+
         }
 
         public IActionResult Index()
