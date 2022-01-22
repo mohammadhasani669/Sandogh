@@ -36,7 +36,7 @@ namespace Sandogh.Persistance.Carts
               .Include(p => p.Items)
               .ThenInclude(p => p.Product)
               .ThenInclude(p => p.Images)
-              .SingleOrDefault(p => p.BuyerId == BuyerId);
+              .FirstOrDefault(p => p.BuyerId == BuyerId);
             if (basket == null)
             {
                 //سبد خرید را ایجاد کنید
@@ -58,6 +58,23 @@ namespace Sandogh.Persistance.Carts
                 }).ToList(),
             };
         }
+
+        public bool RemoveItemFromCart(int ItemId)
+        {
+            var item = _context.CartItems.SingleOrDefault(x => x.Id == ItemId);
+            _context.CartItems.Remove(item);
+            _context.SaveChanges();
+            return true;
+        }
+
+        public bool SetQuantities(int itemId, int quantity)
+        {
+            var item = _context.CartItems.SingleOrDefault(p => p.Id == itemId);
+            item.SetQuantity(quantity);
+            _context.SaveChanges();
+            return true;
+        }
+
         private CartDto CreateBasketForUser(string BuyerId)
         {
             Cart basket = new Cart(BuyerId);

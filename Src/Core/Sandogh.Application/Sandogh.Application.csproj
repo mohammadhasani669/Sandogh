@@ -22,7 +22,8 @@
     <Folder Include="AdminMenus\Command\Delete\" />
     <Folder Include="AdminMenus\Queries\GetAll\" />
     <Folder Include="BankAccounts\Queries\Find\" />
-    <Folder Include="Carts\Command\" />
+    <Folder Include="Carts\Command\Add\" />
+    <Folder Include="Carts\Command\GetOrCreate\" />
     <Folder Include="Common\" />
     <Folder Include="Emails\Command\Edit\" />
     <Folder Include="Emails\Command\Delete\" />

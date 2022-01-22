@@ -38,6 +38,7 @@ namespace Sandogh.Application.Interfaces.Contexts
         public DbSet<ProductImage> ProductImages { get; set; }
         public DbSet<Size> Sizes { get; set; }
         public DbSet<Cart> Carts { get; set; }
+        public DbSet<CartItem> CartItems { get; set; }
 
         int SaveChanges();
         int SaveChanges(bool acceptAllChangesOnSuccess);

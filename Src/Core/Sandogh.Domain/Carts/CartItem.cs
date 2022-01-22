@@ -1,10 +1,10 @@
-﻿using Sandogh.Domain.Products;
+﻿using Sandogh.Domain.Common;
+using Sandogh.Domain.Products;
 
 namespace Sandogh.Domain.Carts
 {
-    public class CartItem
+    public class CartItem : Entity
     {
-        public int Id { get; set; }
         public int UnitPrice { get; private set; }
         public int Quantity { get; private set; }
         public int ProductId { get; private set; }
@@ -14,12 +14,16 @@ namespace Sandogh.Domain.Carts
         {
             ProductId = productId;
             UnitPrice = unitPrice;
-            Quantity = quantity;
+            SetQuantity(quantity);
         }
 
         public void AddQuantity(int quantity)
         {
             Quantity += quantity;
+        }
+        public void SetQuantity(int quantity)
+        {
+            Quantity = quantity;
         }
     }
 }

@@ -29,7 +29,21 @@ namespace Sandogh.WebSite.EndPoint.Controllers
         {
             var cart = GetOrSetCart();
             _cart.AddItemToCart(cart.Id, productId, qty);
-            return View(nameof(Index));
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        public IActionResult RemoveItemFromCart(int ItemId)
+        {
+            var result = _cart.RemoveItemFromCart(ItemId);
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        public IActionResult SetQuantities(int ItemId, int qty)
+        {
+            return Json(_cart.SetQuantities(ItemId, qty));
+            
         }
 
         private CartDto GetOrSetCart()
@@ -42,9 +56,7 @@ namespace Sandogh.WebSite.EndPoint.Controllers
             {
                 SetCookieForCart();
                 return _cart.GetOrCreateBasketForUser(UserId);
-
             }
-
         }
 
         private void SetCookieForCart()
@@ -62,9 +74,6 @@ namespace Sandogh.WebSite.EndPoint.Controllers
                 Expires = DateTime.Now.AddYears(2)
             };
             Response.Cookies.Append(CartCookieName, UserId, CookieOptions);
-
-
-
         }
     }
 }

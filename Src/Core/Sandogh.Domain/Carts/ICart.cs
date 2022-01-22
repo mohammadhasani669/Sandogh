@@ -11,5 +11,7 @@ namespace Sandogh.Domain.Carts
     {
         CartDto GetOrCreateBasketForUser(string BuyerId);
         void AddItemToCart(int cartId, int productId, int qty = 1);
+        bool RemoveItemFromCart(int ItemId);
+        bool SetQuantities(int itemId, int quantity);
     }
 }

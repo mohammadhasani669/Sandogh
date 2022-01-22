@@ -3,36 +3,65 @@
 
 <div class="auto-container">
     <div class="clearfix">
-        <div class="card">
-            <div class="card-header">
-                <div class="card-title">سبد خرید</div>
+        @foreach (var item in Model.Items)
+        {
+            <div class="card" style="margin-bottom:1.5rem;">
+                <div class="card-header">
+                    <div class="card-title">سبد خرید</div>
+                </div>
+                <div class="card-body" style="display:flex;width:100%;">
+                    <div style="width:20%">
+                        <img src="~/theme/images/resource/products/1.jpg" width=250 alt="">
+                    </div>
+                    <div style="width:80%">
+                        <p>@item.ProductName</p>
+
+                        <p>@item.UnitPrice.ToString("n0") تومان</p>
+                        <p>@((item.UnitPrice * item.Quantity).ToString("n0")) تومان</p>
+                        <p>
+                            <div class="item-title">تعداد</div>
+                            <div class="item-quantity">
+                                <input class="quantity-spinner"
+                                       type="text" onchange="SetQty('@item.Id')" 
+                                       id="quantity-@item.Id"
+                                       value="@item.Quantity">
+                            </div>
+
+
+                        </p>
+
+                        <p>
+                            <form asp-action="RemoveItemFromCart" asp-controller="Carts" method="post">
+                                <input name="ItemId" type="hidden" value=@item.Id>
+                                <button class="btn btn-danger"> <i class="fa fa-trash-o"></i> حذف </button>
+                            </form>
+                        </p>
+                    </div>
+                </div>
             </div>
+        }
+        <div class="card">
             <div class="card-body">
-                <table class="table table-bordered table-striped" style="margin-top:150px;margin-bottom:100px;">
-                    <thead>
-                        <tr>
-                            <th>ردیف</th>
-                            <th>نام کالا</th>
-                            <th>تعداد</th>
-                            <th>قیمت</th>
-                        </tr>
-
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model.Items)
-                        {
-                            <tr>
-                                <td>1</td>
-                                <td>@item.ProductName</td>
-                                <td>@item.Quantity</td>
-                                <td>@item.UnitPrice</td>
-                            </tr>
-
-                        }
-                    </tbody>
-                </table>
+                @Model.Items.Sum(p => p.UnitPrice * p.Quantity).ToString("n0") مبلغ قابل پرداخت
             </div>
         </div>
     </div>
 </div>
+
+@section Scripts{
+<script>
+    function  SetQty(itemId){
+           var quantity = $("#quantity-"+itemId).val();
+
+           $.ajax({
+            type: "POST",
+            url: "/Carts/SetQuantities?ItemId=" + itemId + "&&qty=" + quantity,
+            success: function () {
+                location.reload();
+            }
+        })
+    }
+
+</script>
+}
 

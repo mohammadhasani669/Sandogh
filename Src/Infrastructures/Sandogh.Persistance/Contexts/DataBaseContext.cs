@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 using Sandogh.Application.Interfaces.Contexts;
 using Sandogh.Domain.AdminMenu;
 using Sandogh.Domain.BankAccounts;
@@ -13,8 +14,9 @@ using Sandogh.Domain.Logs;
 using Sandogh.Domain.People;
 using Sandogh.Domain.Products;
 using Sandogh.Domain.Transactions;
+using System;
 using System.Linq;
-
+using System.Linq.Expressions;
 
 namespace Sandogh.Persistance.Contexts
 {
@@ -43,12 +45,34 @@ namespace Sandogh.Persistance.Contexts
         public DbSet<Size> Sizes { get; set; }
 
         public DbSet<Cart> Carts { get; set; }
+        public DbSet<CartItem> CartItems { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(DatabaseContext).Assembly);
-            modelBuilder.Entity<Brand>().HasQueryFilter(x => !x.IsRemoved);
+
+            #region Global QueryFilter for All Entity
+
+           
+            // define your filter expression tree
+            Expression<Func<Entity, bool>> filterExpr = bm => !bm.IsRemoved;
+            foreach (var mutableEntityType in modelBuilder.Model.GetEntityTypes())
+            {
+                // check if current entity type is child of BaseModel
+                if (mutableEntityType.ClrType.IsAssignableTo(typeof(Entity)))
+                {
+                    // modify expression to handle correct child type
+                    var parameter = Expression.Parameter(mutableEntityType.ClrType);
+                    var body = ReplacingExpressionVisitor.Replace(filterExpr.Parameters.First(), parameter, filterExpr.Body);
+                    var lambdaExpression = Expression.Lambda(body, parameter);
+
+                    // set filter
+                    mutableEntityType.SetQueryFilter(lambdaExpression);
+                }
+            }
+            //modelBuilder.Entity<Brand>().HasQueryFilter(x => !x.IsRemoved);
+            #endregion
 
             base.OnModelCreating(modelBuilder); 
         }
