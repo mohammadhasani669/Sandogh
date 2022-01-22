@@ -41,7 +41,7 @@ namespace Sandogh.Admin.EndPoint
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<AddProductCommand>()); ;
+            services.AddControllersWithViews().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<AddProductCommand>());
 
             services.AddDbContext<DatabaseContext>(option => option.UseSqlServer(Configuration.GetConnectionString("SqlServer")));
             services.AddTransient<IDataBaseContext, DatabaseContext>();
@@ -70,11 +70,11 @@ namespace Sandogh.Admin.EndPoint
             services.AddTransient<IAdminMenu, AdminMenuService>();
             services.AddTransient<ILoan, LoanService>();
             services.AddTransient<IProduct, ProductService>();
-            services.AddTransient<IProductBrand, ProductBrandService>();
+            services.AddTransient<IBrand, ProductBrandService>();
             services.AddTransient<IProductCategory, ProductCategoryService>();
             services.AddTransient<IProductFeature, ProductFeatureService>();
             services.AddTransient<IProductImage, ProductImageService>();
-            services.AddTransient<IProductSize, ProductSizeService>();
+            services.AddTransient<ISize, ProductSizeService>();
             services.AddTransient<ITransaction, TransactionService>();
 
 

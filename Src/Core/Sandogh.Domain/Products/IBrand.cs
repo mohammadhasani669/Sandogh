@@ -4,8 +4,8 @@ using System.Collections.Generic;
 
 namespace Sandogh.Domain.Products
 {
-    public interface IProductBrand : IRepository<ProductBrand>
+    public interface IBrand : IRepository<Brand>
     {
-        IEnumerable<ProductBrand> GetAllForDDL();
+        IEnumerable<Brand> GetAllForDDL();
     }
 }

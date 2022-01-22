@@ -11,11 +11,11 @@ namespace Sandogh.Admin.EndPoint.Controllers
     public class ProductsController : Controller
     {
         private readonly IMediator _mediator;
-        private readonly IProductBrand _productBrand;
+        private readonly IBrand _productBrand;
         private readonly IProductCategory _productCategory;
-        private readonly IProductSize _productSize;
+        private readonly ISize _productSize;
 
-        public ProductsController(IMediator mediator, IProductBrand productBrand, IProductCategory productCategory, IProductSize productSize)
+        public ProductsController(IMediator mediator, IBrand productBrand, IProductCategory productCategory, ISize productSize)
         {
             _mediator = mediator;
             _productBrand = productBrand;

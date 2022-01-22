@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Sandogh.Domain.Products
 {
-    public interface IProductSize : IRepository<ProductSize>
+    public interface ISize : IRepository<Size>
     {
-        IEnumerable<ProductSize> GetAllForDDL();
+        IEnumerable<Size> GetAllForDDL();
     }
 }

@@ -1,3 +1,5 @@
+using FluentValidation.AspNetCore;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -7,10 +9,25 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Sandogh.Application.Emails;
 using Sandogh.Application.Interfaces.Contexts;
+using Sandogh.Application.People.Repository;
+using Sandogh.Application.Products.Command.Add;
+using Sandogh.Application.Products.Queries.GetAll;
 using Sandogh.Application.Visitors.SaveVisitorInfo;
 using Sandogh.Common;
+using Sandogh.Domain.AdminMenu;
+using Sandogh.Domain.BankAccounts;
+using Sandogh.Domain.Carts;
+using Sandogh.Domain.Loans;
+using Sandogh.Domain.Products;
+using Sandogh.Domain.Transactions;
 using Sandogh.Infrastructure.IdentityConfigs;
+using Sandogh.Infrastructure.MappingProfile;
+using Sandogh.Persistance.AdminMenus;
+using Sandogh.Persistance.Carts;
 using Sandogh.Persistance.Contexts;
+using Sandogh.Persistance.Loans;
+using Sandogh.Persistance.Products;
+using Sandogh.Persistance.Transactions;
 using Sandogh.WebSite.EndPoint.Hubs;
 using Sandogh.WebSite.EndPoint.Utilities.Filters;
 using System;
@@ -44,7 +61,9 @@ namespace Sandogh.WebSite.EndPoint
             configs.DapperConnetionString = Configuration.GetConnectionString("SqlServer");
 
             services.AddSingleton(configs);
-            services.AddControllersWithViews();
+
+            services.AddControllersWithViews().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<AddProductCommand>()); 
+
             services.AddTransient<IDataBaseContext, DatabaseContext>();
             //services.AddTransient<IIdentityDatabaseContext, IdentityDatabaseContext>();
             services.AddDbContext<DatabaseContext>(option => option.UseSqlServer(Configuration.GetConnectionString("SqlServer")));
@@ -67,9 +86,29 @@ namespace Sandogh.WebSite.EndPoint
 
             services.AddTransient(typeof(IMongoDbContext<>), typeof(MongoContext<>));
             services.AddTransient<SaveVisitorInfoService,SaveVisitorInfoService>();
-            services.AddScoped<IEmailService,EmailService>();
             services.AddScoped<SaveVisitorFilter>();
 
+
+            services.AddTransient<ICart, CartService>();
+            services.AddTransient<IPerson, PersonService>();
+            services.AddTransient<IBankAccount, BankAccountService>();
+            services.AddTransient<IEmailService, EmailService>();
+            services.AddTransient<IAdminMenu, AdminMenuService>();
+            services.AddTransient<ILoan, LoanService>();
+            services.AddTransient<IProduct, ProductService>();
+            services.AddTransient<IBrand, ProductBrandService>();
+            services.AddTransient<IProductCategory, ProductCategoryService>();
+            services.AddTransient<IProductFeature, ProductFeatureService>();
+            services.AddTransient<IProductImage, ProductImageService>();
+            services.AddTransient<ISize, ProductSizeService>();
+            services.AddTransient<ITransaction, TransactionService>();
+
+
+            //Add MediatR
+            services.AddMediatR(typeof(GetAllProductQuery).Assembly);
+
+            //mapper
+            services.AddAutoMapper(typeof(ProductMappingProfile));
 
             services.AddSignalR();
 

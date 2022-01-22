@@ -4,6 +4,7 @@ using Sandogh.Domain.AdminMenu;
 using Sandogh.Domain.BankAccounts;
 using Sandogh.Domain.BankProfits;
 using Sandogh.Domain.BlackLists;
+using Sandogh.Domain.Carts;
 using Sandogh.Domain.Common;
 using Sandogh.Domain.Emails;
 using Sandogh.Domain.LoanRepayments;
@@ -35,19 +36,19 @@ namespace Sandogh.Persistance.Contexts
         public DbSet<AdminMenu> AdminMenus { get; set; }
 
         public DbSet<Product> Products { get; set; }
-        public DbSet<ProductBrand> ProductBrands { get; set; }
+        public DbSet<Brand> Brands { get; set; }
         public DbSet<ProductCategory> ProductCategories { get; set; }
         public DbSet<ProductFeature> ProductFeatures { get; set; }
         public DbSet<ProductImage> ProductImages { get; set; }
-        public DbSet<ProductSize> ProductSizes { get; set; }
+        public DbSet<Size> Sizes { get; set; }
 
-        
+        public DbSet<Cart> Carts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(DatabaseContext).Assembly);
-            modelBuilder.Entity<ProductBrand>().HasQueryFilter(x => !x.IsRemoved);
+            modelBuilder.Entity<Brand>().HasQueryFilter(x => !x.IsRemoved);
 
             base.OnModelCreating(modelBuilder); 
         }

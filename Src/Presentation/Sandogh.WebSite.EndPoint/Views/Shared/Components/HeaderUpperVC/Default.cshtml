@@ -60,21 +60,21 @@
                                 </li>*@
                             @if (User.Identity.IsAuthenticated)
                             {
-                              <li>
+                                <li>
                                     <a href="@Url.Action("Profile","Account")">@User.Identity.Name</a>
 
                                 </li>
                                 <li>
                                     <a>
                                         <form action="@Url.Action("Logout","Account")" method="post">
-                                            <input type="submit" value="خروج" style="background-color:transparent"/>
+                                            <input type="submit" value="خروج" style="background-color:transparent" />
                                         </form>
                                     </a>
                                 </li>
                             }
                             else
                             {
-                                   <li>
+                                <li>
                                     <a href="@Url.Action("Login","Account")">
                                         ورود
                                     </a>
@@ -85,8 +85,13 @@
                                     </a>
                                 </li>
 
-                               
+
                             }
+                             <li>
+                                <a href="@Url.Action("Index","Products")">
+                                    فروشگاه
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </nav>

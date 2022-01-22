@@ -3,6 +3,7 @@ using Sandogh.Domain.AdminMenu;
 using Sandogh.Domain.BankAccounts;
 using Sandogh.Domain.BankProfits;
 using Sandogh.Domain.BlackLists;
+using Sandogh.Domain.Carts;
 using Sandogh.Domain.Emails;
 using Sandogh.Domain.LoanRepayments;
 using Sandogh.Domain.Loans;
@@ -31,12 +32,12 @@ namespace Sandogh.Application.Interfaces.Contexts
         public DbSet<AdminMenu> AdminMenus { get; set; }
 
         public DbSet<Product> Products { get; set; }
-        public DbSet<ProductBrand> ProductBrands { get; set; }
+        public DbSet<Brand> Brands { get; set; }
         public DbSet<ProductCategory> ProductCategories { get; set; }
         public DbSet<ProductFeature> ProductFeatures { get; set; }
         public DbSet<ProductImage> ProductImages { get; set; }
-        public DbSet<ProductSize> ProductSizes { get; set; }
-
+        public DbSet<Size> Sizes { get; set; }
+        public DbSet<Cart> Carts { get; set; }
 
         int SaveChanges();
         int SaveChanges(bool acceptAllChangesOnSuccess);

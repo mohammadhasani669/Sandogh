@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Sandogh.Persistance.Contexts;
 
 namespace Sandogh.Persistance.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20220122102444_RenameFiled2")]
+    partial class RenameFiled2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -412,7 +414,7 @@ namespace Sandogh.Persistance.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Brands");
+                    b.ToTable("ProductBrands");
                 });
 
             modelBuilder.Entity("Sandogh.Domain.Products.Product", b =>
@@ -589,7 +591,7 @@ namespace Sandogh.Persistance.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Sizes");
+                    b.ToTable("ProductSizes");
                 });
 
             modelBuilder.Entity("Sandogh.Domain.Transactions.Transaction", b =>

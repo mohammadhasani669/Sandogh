@@ -1,0 +1,118 @@
+﻿@model PaginatedItemsDto<Sandogh.Application.Products.Queries.GetAll.GetAllProductQuery>
+
+
+<!--Sidebar Page Container-->
+<div class="sidebar-page-container">
+    <div class="auto-container">
+        <div class="row clearfix">
+
+            <!--Content Side / Our Shop-->
+            <div class="content-side col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                <div class="our-shop">
+
+                    <!--Filter Bar-->
+                    <div class="filter-bar clearfix">
+                        <div class="title pull-left">در حال نمایش 1–9 از 12 نتیجه</div>
+                        <div class="filters pull-right">
+
+                            <div class="drop-list-one">
+                                <div class="inner clearfix">
+                                    <div class="dropdown-outer">
+                                        <a class="btn-box dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" href="#">مرتب سازی پیشفرض</a>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                            <li><a href="#">مطلب</a></li>
+                                            <li><a href="#">تاریخ</a></li>
+                                            <li><a href="#">صعودی</a></li>
+                                            <li><a href="#">نزولی</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row clearfix grid-blocks">
+
+                        <!--Shop Item-->
+                        @foreach (var item in Model.Data)
+                        {
+                            <div class="shop-item col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                                <div class="inner-box">
+                                    <div class="image">
+                                        <a href="@Url.Action("Details","Products",new {Id = item.Id})">
+                                            <img src="~/theme/images/resource/products/1.jpg" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="lower-content">
+                                        <h3><a href="@Url.Action("Details","Products",new {Id = item.Id})">@item.Image</a></h3>
+                                        <div class="price">@item.Price تومان</div>
+                                        <a href="shop-single.html" class="theme-btn btn-style-one">افزودن به سبد</a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                </div>
+                <!-- Styled Pagination -->
+                <div class="styled-pagination">
+                    <ul class="clearfix">
+                        <li><a href="#" class="active">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a class="next" href="#">بعدی</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!--Sidebar Side-->
+            <div class="sidebar-side col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                <aside class="sidebar default-sidebar">
+
+                    <!--Blog Category Widget-->
+                    <div class="sidebar-widget sidebar-blog-category">
+                        <div class="sidebar-title">
+                            <h2>دسته‌بندی ها</h2>
+                        </div>
+                        <ul class="blog-cat">
+                            <li><a href="#">ساخت و ساز<span>(06)</span></a></li>
+                            <li><a href="#">معماری <span>(12)</span></a></li>
+                            <li><a href="#">جداسازی<span>(07)</span></a></li>
+                            <li><a href="#">نوسازی<span>(23)</span></a></li>
+                            <li><a href="#">طراحی و ساخت<span>(19)</span></a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Search -->
+                    <div class="sidebar-widget search-box">
+                        <form method="post" action="contact.html">
+                            <div class="form-group">
+                                <input type="search" name="search-field" value="" placeholder="جستجو ..." required>
+                                <button type="submit"><span class="icon fa fa-search"></span></button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!--Range Slider-->
+                    <div class="sidebar-widget range-slider-one">
+                        <div class="sidebar-title"><h2>فیلتر با قیمت</h2></div>
+                        <div class="price-range-slider"></div>
+                        <div class="slider-header">
+                            <div class="clearfix">
+                                <div class="input"><input type="text" class="property-amount" name="field-name" readonly></div>
+                                <div class="title"><a href="#" class="filter-btn">فیلتر</a></div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </aside>
+            </div>
+            <!--End Sidebar Side-->
+
+        </div>
+    </div>
+</div>

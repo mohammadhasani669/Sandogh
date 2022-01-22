@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Sandogh.Persistance.Contexts;
 
 namespace Sandogh.Persistance.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20220122074846_RenameFiled")]
+    partial class RenameFiled
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -379,7 +381,67 @@ namespace Sandogh.Persistance.Migrations
                     b.ToTable("People");
                 });
 
-            modelBuilder.Entity("Sandogh.Domain.Products.Brand", b =>
+            modelBuilder.Entity("Sandogh.Domain.Products.Product", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AvailableStock")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Enable")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("HasColor")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("HasSize")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("InsertTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsRemoved")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("MaxStockThreshold")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Price")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductBrandId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductCategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RestockThreshold")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SizeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductBrandId");
+
+                    b.HasIndex("ProductCategoryId");
+
+                    b.HasIndex("SizeId");
+
+                    b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("Sandogh.Domain.Products.ProductBrand", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -412,67 +474,7 @@ namespace Sandogh.Persistance.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Brands");
-                });
-
-            modelBuilder.Entity("Sandogh.Domain.Products.Product", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("AvailableStock")
-                        .HasColumnType("int");
-
-                    b.Property<int>("BrandId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("Enable")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("HasColor")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("HasSize")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("InsertTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsRemoved")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("MaxStockThreshold")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Price")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductCategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RestockThreshold")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SizeId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BrandId");
-
-                    b.HasIndex("ProductCategoryId");
-
-                    b.HasIndex("SizeId");
-
-                    b.ToTable("Products");
+                    b.ToTable("ProductBrands");
                 });
 
             modelBuilder.Entity("Sandogh.Domain.Products.ProductCategory", b =>
@@ -571,7 +573,7 @@ namespace Sandogh.Persistance.Migrations
                     b.ToTable("ProductImages");
                 });
 
-            modelBuilder.Entity("Sandogh.Domain.Products.Size", b =>
+            modelBuilder.Entity("Sandogh.Domain.Products.ProductSize", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -589,7 +591,7 @@ namespace Sandogh.Persistance.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Sizes");
+                    b.ToTable("ProductSizes");
                 });
 
             modelBuilder.Entity("Sandogh.Domain.Transactions.Transaction", b =>
@@ -698,9 +700,9 @@ namespace Sandogh.Persistance.Migrations
 
             modelBuilder.Entity("Sandogh.Domain.Products.Product", b =>
                 {
-                    b.HasOne("Sandogh.Domain.Products.Brand", "Brand")
+                    b.HasOne("Sandogh.Domain.Products.ProductBrand", "ProductBrand")
                         .WithMany("Products")
-                        .HasForeignKey("BrandId")
+                        .HasForeignKey("ProductBrandId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -710,13 +712,13 @@ namespace Sandogh.Persistance.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Sandogh.Domain.Products.Size", "Size")
+                    b.HasOne("Sandogh.Domain.Products.ProductSize", "Size")
                         .WithMany("Products")
                         .HasForeignKey("SizeId");
 
-                    b.Navigation("Brand");
-
                     b.Navigation("Category");
+
+                    b.Navigation("ProductBrand");
 
                     b.Navigation("Size");
                 });
@@ -788,16 +790,16 @@ namespace Sandogh.Persistance.Migrations
                     b.Navigation("Loans");
                 });
 
-            modelBuilder.Entity("Sandogh.Domain.Products.Brand", b =>
-                {
-                    b.Navigation("Products");
-                });
-
             modelBuilder.Entity("Sandogh.Domain.Products.Product", b =>
                 {
                     b.Navigation("Features");
 
                     b.Navigation("Images");
+                });
+
+            modelBuilder.Entity("Sandogh.Domain.Products.ProductBrand", b =>
+                {
+                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("Sandogh.Domain.Products.ProductCategory", b =>
@@ -807,7 +809,7 @@ namespace Sandogh.Persistance.Migrations
                     b.Navigation("SubProductCategory");
                 });
 
-            modelBuilder.Entity("Sandogh.Domain.Products.Size", b =>
+            modelBuilder.Entity("Sandogh.Domain.Products.ProductSize", b =>
                 {
                     b.Navigation("Products");
                 });

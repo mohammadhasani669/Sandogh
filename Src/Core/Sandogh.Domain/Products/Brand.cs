@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Sandogh.Domain.Products
 {
-    public class ProductBrand : Entity
+    public class Brand : Entity
     {
         public string Name { get; set; }
         public string EnName { get; set; }

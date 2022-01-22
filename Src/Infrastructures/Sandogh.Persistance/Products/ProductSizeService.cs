@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Sandogh.Persistance.Products
 {
-    public class ProductSizeService : EfRepository<ProductSize>, IProductSize
+    public class ProductSizeService : EfRepository<Size>, ISize
     {
         private readonly DatabaseContext _context;
         public ProductSizeService(DatabaseContext dataBaseContext) : base(dataBaseContext)
@@ -17,9 +17,9 @@ namespace Sandogh.Persistance.Products
             _context = dataBaseContext;
         }
 
-        public IEnumerable<ProductSize> GetAllForDDL()
+        public IEnumerable<Size> GetAllForDDL()
         {
-            return _context.ProductSizes.Select(x => new ProductSize { Id = x.Id, Name = x.Name }).ToList();
+            return _context.Sizes.Select(x => new Size { Id = x.Id, Name = x.Name }).ToList();
         }
     }
 }

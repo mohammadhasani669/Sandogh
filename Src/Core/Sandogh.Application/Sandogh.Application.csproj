@@ -22,6 +22,7 @@
     <Folder Include="AdminMenus\Command\Delete\" />
     <Folder Include="AdminMenus\Queries\GetAll\" />
     <Folder Include="BankAccounts\Queries\Find\" />
+    <Folder Include="Carts\Command\" />
     <Folder Include="Common\" />
     <Folder Include="Emails\Command\Edit\" />
     <Folder Include="Emails\Command\Delete\" />
@@ -34,7 +35,7 @@
     <Folder Include="People\Queries\Find\" />
     <Folder Include="Products\Command\Edit\" />
     <Folder Include="Products\Command\Delete\" />
-    <Folder Include="Products\Queries\" />
+    <Folder Include="Products\Queries\Find\" />
   </ItemGroup>
 
 </Project>

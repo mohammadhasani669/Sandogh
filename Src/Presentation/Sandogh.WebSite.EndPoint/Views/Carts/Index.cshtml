@@ -1,0 +1,38 @@
+﻿@model Sandogh.Domain.Carts.CartDto
+
+
+<div class="auto-container">
+    <div class="clearfix">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">سبد خرید</div>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered table-striped" style="margin-top:150px;margin-bottom:100px;">
+                    <thead>
+                        <tr>
+                            <th>ردیف</th>
+                            <th>نام کالا</th>
+                            <th>تعداد</th>
+                            <th>قیمت</th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Items)
+                        {
+                            <tr>
+                                <td>1</td>
+                                <td>@item.ProductName</td>
+                                <td>@item.Quantity</td>
+                                <td>@item.UnitPrice</td>
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

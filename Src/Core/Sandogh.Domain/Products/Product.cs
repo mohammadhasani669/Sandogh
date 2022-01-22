@@ -23,10 +23,10 @@ namespace Sandogh.Domain.Products
         public ProductCategory Category { get; set; }
 
         public int? SizeId { get; set; }
-        public ProductSize Size { get; set; }
+        public Size Size { get; set; }
 
         public int BrandId { get; set; }
-        public ProductBrand ProductBrand { get; set; }
+        public Brand Brand { get; set; }
 
         public ICollection<ProductImage> Images { get; set; }
         public ICollection<ProductFeature>  Features { get; set; }
