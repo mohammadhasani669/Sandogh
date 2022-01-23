@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Sandogh.Domain.Carts;
 using Sandogh.Domain.Users;
 using System;
+using System.Security.Claims;
 
 namespace Sandogh.WebSite.EndPoint.Controllers
 {
@@ -50,7 +51,7 @@ namespace Sandogh.WebSite.EndPoint.Controllers
         {
             if (_signInManager.IsSignedIn(User))
             {
-                return _cart.GetOrCreateBasketForUser(User.Identity.Name);
+                return _cart.GetOrCreateBasketForUser(User.FindFirst(ClaimTypes.NameIdentifier).Value);
             }
             else
             {

@@ -13,5 +13,7 @@ namespace Sandogh.Domain.Carts
         void AddItemToCart(int cartId, int productId, int qty = 1);
         bool RemoveItemFromCart(int ItemId);
         bool SetQuantities(int itemId, int quantity);
+        CartDto GetBasketForUser(string UserId);
+        void TransferBasket(string anonymousId, string UserId);
     }
 }

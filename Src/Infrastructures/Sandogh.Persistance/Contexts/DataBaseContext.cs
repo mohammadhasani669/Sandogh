@@ -14,6 +14,7 @@ using Sandogh.Domain.Logs;
 using Sandogh.Domain.People;
 using Sandogh.Domain.Products;
 using Sandogh.Domain.Transactions;
+using Sandogh.Domain.Users;
 using System;
 using System.Linq;
 using System.Linq.Expressions;
@@ -46,7 +47,8 @@ namespace Sandogh.Persistance.Contexts
 
         public DbSet<Cart> Carts { get; set; }
         public DbSet<CartItem> CartItems { get; set; }
-
+        public DbSet<UserAddress> UserAddresses { get; set; }
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 

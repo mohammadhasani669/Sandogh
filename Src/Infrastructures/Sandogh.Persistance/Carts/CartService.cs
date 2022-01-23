@@ -30,6 +30,34 @@ namespace Sandogh.Persistance.Carts
             _context.SaveChanges();
         }
 
+        public CartDto GetBasketForUser(string UserId)
+        {
+            var basket = _context.Carts
+            .Include(p => p.Items)
+            .ThenInclude(p => p.Product)
+            .ThenInclude(p => p.Images)
+            .FirstOrDefault(p => p.BuyerId == UserId);
+            if (basket == null)
+            {
+                return null;
+            }
+            return new CartDto
+            {
+                Id = basket.Id,
+                BuyerId = basket.BuyerId,
+                Items = basket.Items.Select(item => new CartItemDto
+                {
+                    ProductId = item.ProductId,
+                    Id = item.Id,
+                    ProductName = item.Product.Name,
+                    Quantity = item.Quantity,
+                    UnitPrice = item.UnitPrice,
+                    ImageUrl = item?.Product?.Images?.FirstOrDefault()?.Src ?? "",
+
+                }).ToList(),
+            };
+        }
+
         public CartDto GetOrCreateBasketForUser(string BuyerId)
         {
             var basket = _context.Carts
@@ -73,6 +101,27 @@ namespace Sandogh.Persistance.Carts
             item.SetQuantity(quantity);
             _context.SaveChanges();
             return true;
+        }
+
+        public void TransferBasket(string anonymousId, string UserId)
+        {
+            var anonymousBasket = _context.Carts
+                .SingleOrDefault(p => p.BuyerId == anonymousId);
+            if (anonymousBasket == null) return;
+            var userBasket = _context.Carts.SingleOrDefault(p => p.BuyerId == UserId);
+            if (userBasket == null)
+            {
+                userBasket = new Cart(UserId);
+                _context.Carts.Add(userBasket);
+            }
+
+            foreach (var item in anonymousBasket.Items)
+            {
+                userBasket.AddItem(item.ProductId, item.Quantity, item.UnitPrice);
+            }
+
+            _context.Carts.Remove(anonymousBasket);
+            _context.SaveChanges();
         }
 
         private CartDto CreateBasketForUser(string BuyerId)

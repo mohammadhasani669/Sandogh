@@ -6,6 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Areas\Customer\Views\Shared\_ValidationScriptsPartial.cshtml" />
+    <Content Remove="Areas\Customer\Views\_ViewImports.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Areas\Customer\Views\Shared\_ValidationScriptsPartial.cshtml" />
+    <None Include="Areas\Customer\Views\_ViewImports.cshtml" />
     <None Include="Views\Home\Index.cshtml" />
     <None Include="Views\Home\Privacy.cshtml" />
     <None Include="Views\Shared\Error.cshtml" />
@@ -54,6 +61,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
     <PackageReference Include="UAParser" Version="3.1.47" />
   </ItemGroup>
 
@@ -61,6 +69,11 @@
     <ProjectReference Include="..\..\Core\Sandogh.Application\Sandogh.Application.csproj" />
     <ProjectReference Include="..\..\Infrastructures\Sandogh.Infrastructure\Sandogh.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Infrastructures\Sandogh.Persistance\Sandogh.Persistance.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Customer\Data\" />
+    <Folder Include="Areas\Customer\Models\" />
   </ItemGroup>
 
 </Project>

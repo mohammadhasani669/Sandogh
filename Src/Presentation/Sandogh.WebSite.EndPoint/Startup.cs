@@ -1,4 +1,4 @@
-using FluentValidation.AspNetCore;
+﻿using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -50,9 +50,9 @@ namespace Sandogh.WebSite.EndPoint
         public void ConfigureServices(IServiceCollection services)
         {
             Configs configs = new Configs();
-          
-           
-            configs.EmailPassword = Configuration[nameof(configs.EmailPassword) ];
+
+
+            configs.EmailPassword = Configuration[nameof(configs.EmailPassword)];
             configs.GoogleAuthenticationClientId = Configuration[nameof(configs.GoogleAuthenticationClientId)];
             configs.GoogleAuthenticationClientSecret = Configuration[nameof(configs.GoogleAuthenticationClientSecret)];
             configs.GoogleRecaptchaSecretKey = Configuration[nameof(configs.GoogleRecaptchaSecretKey)];
@@ -62,7 +62,7 @@ namespace Sandogh.WebSite.EndPoint
 
             services.AddSingleton(configs);
 
-            services.AddControllersWithViews().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<AddProductCommand>()); 
+            services.AddControllersWithViews().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<AddProductCommand>());
 
             services.AddTransient<IDataBaseContext, DatabaseContext>();
             //services.AddTransient<IIdentityDatabaseContext, IdentityDatabaseContext>();
@@ -85,7 +85,7 @@ namespace Sandogh.WebSite.EndPoint
             });
 
             services.AddTransient(typeof(IMongoDbContext<>), typeof(MongoContext<>));
-            services.AddTransient<SaveVisitorInfoService,SaveVisitorInfoService>();
+            services.AddTransient<SaveVisitorInfoService, SaveVisitorInfoService>();
             services.AddScoped<SaveVisitorFilter>();
 
 
@@ -109,6 +109,7 @@ namespace Sandogh.WebSite.EndPoint
 
             //mapper
             services.AddAutoMapper(typeof(ProductMappingProfile));
+            services.AddAutoMapper(typeof(UserMappingProfile));
 
             services.AddSignalR();
 
@@ -131,11 +132,17 @@ namespace Sandogh.WebSite.EndPoint
             app.UseStaticFiles();
 
             app.UseRouting();
-            app.UseAuthentication(); 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
+                //باید بالاترین باشه تا  مشکل ایجاد نکنه
+                endpoints.MapControllerRoute(
+                   name: "areas",
+                   pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                 );
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");

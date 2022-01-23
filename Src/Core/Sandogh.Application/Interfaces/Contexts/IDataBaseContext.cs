@@ -11,6 +11,7 @@ using Sandogh.Domain.Logs;
 using Sandogh.Domain.People;
 using Sandogh.Domain.Products;
 using Sandogh.Domain.Transactions;
+using Sandogh.Domain.Users;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -20,25 +21,26 @@ namespace Sandogh.Application.Interfaces.Contexts
     public interface IDataBaseContext
     {
 
-        public DbSet<BankAccount> BankAccounts { get; set; }
-        public DbSet<BankProfit> BankProfits { get; set; }
-        public DbSet<BlackList> BlackLists { get; set; }
-        public DbSet<Email> Emails { get; set; }
-        public DbSet<LoanRepayment> LoanRepayments { get; set; }
-        public DbSet<Loan> Loans { get; set; }
-        public DbSet<OperationsLog> OperationsLogs { get; set; }
-        public DbSet<Person> People { get; set; }
-        public DbSet<Transaction> Transactions { get; set; }
-        public DbSet<AdminMenu> AdminMenus { get; set; }
+        DbSet<BankAccount> BankAccounts { get; set; }
+        DbSet<BankProfit> BankProfits { get; set; }
+        DbSet<BlackList> BlackLists { get; set; }
+        DbSet<Email> Emails { get; set; }
+        DbSet<LoanRepayment> LoanRepayments { get; set; }
+        DbSet<Loan> Loans { get; set; }
+        DbSet<OperationsLog> OperationsLogs { get; set; }
+        DbSet<Person> People { get; set; }
+        DbSet<Transaction> Transactions { get; set; }
+        DbSet<AdminMenu> AdminMenus { get; set; }
 
-        public DbSet<Product> Products { get; set; }
-        public DbSet<Brand> Brands { get; set; }
-        public DbSet<ProductCategory> ProductCategories { get; set; }
-        public DbSet<ProductFeature> ProductFeatures { get; set; }
-        public DbSet<ProductImage> ProductImages { get; set; }
-        public DbSet<Size> Sizes { get; set; }
-        public DbSet<Cart> Carts { get; set; }
-        public DbSet<CartItem> CartItems { get; set; }
+        DbSet<Product> Products { get; set; }
+        DbSet<Brand> Brands { get; set; }
+        DbSet<ProductCategory> ProductCategories { get; set; }
+        DbSet<ProductFeature> ProductFeatures { get; set; }
+        DbSet<ProductImage> ProductImages { get; set; }
+        DbSet<Size> Sizes { get; set; }
+        DbSet<Cart> Carts { get; set; }
+        DbSet<CartItem> CartItems { get; set; }
+        DbSet<UserAddress> UserAddresses { get; set; }
 
         int SaveChanges();
         int SaveChanges(bool acceptAllChangesOnSuccess);
@@ -46,6 +48,6 @@ namespace Sandogh.Application.Interfaces.Contexts
         Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default);
         DbSet<TEntity> Set<TEntity>() where TEntity : class;
         DbSet<TEntity> Set<TEntity>(string name) where TEntity : class;
-       
+
     }
 }
