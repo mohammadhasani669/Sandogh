@@ -10,7 +10,7 @@ namespace Sandogh.Domain.Common
     {
         public int Id { get; set; }
         public bool IsRemoved { get; set; }
-        public DateTime InsertTime { get; set; }
+        public DateTime InsertTime { get; set; } = DateTime.Now;
 
     }
 }

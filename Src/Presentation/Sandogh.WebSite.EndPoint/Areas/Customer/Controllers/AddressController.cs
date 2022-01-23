@@ -33,6 +33,7 @@ namespace Sandogh.WebSite.EndPoint.Areas.Customer.Controllers
         [HttpPost]
         public IActionResult AddNewAddress(AddUserAddressCommand addUserAddress)
         {
+            addUserAddress.UserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             var result = _mediator.Send(addUserAddress).Result;
             return RedirectToAction(nameof(Index));
         }

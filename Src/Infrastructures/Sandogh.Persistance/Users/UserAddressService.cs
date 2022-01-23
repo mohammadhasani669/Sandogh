@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Sandogh.Persistance.Users
 {
-    public class IUserAddressService : EfRepository<UserAddress>, IUserAddress
+    public class UserAddressService : EfRepository<UserAddress>, IUserAddress
     {
-        public IUserAddressService(DatabaseContext dataBaseContext) : base(dataBaseContext)
+        public UserAddressService(DatabaseContext dataBaseContext) : base(dataBaseContext)
         {
         }
 

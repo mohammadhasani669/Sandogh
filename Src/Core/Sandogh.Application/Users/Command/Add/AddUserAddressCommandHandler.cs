@@ -24,6 +24,7 @@ namespace Sandogh.Application.Users.Command.Add
 
         protected override int Handle(AddUserAddressCommand request)
         {
+           
            var data= _mapper.Map<UserAddress>(request);
             _context.UserAddresses.Add(data);
             _context.SaveChanges();
