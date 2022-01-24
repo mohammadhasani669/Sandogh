@@ -1,10 +1,8 @@
 ﻿@model List<Sandogh.Application.Users.Query.GetUserAddress.UserAddressQuery>
 @{
-    ViewData["Title"] = "Home Page";
-    Layout = "_LayoutInsidePages";
+     Layout = "~/Views/Shared/_LayoutCustomerPanel.cshtml";
 }
-<div class="container">
-    <div class="row my-5">
+        <a class="btn btn-success mb-3" href="@Url.Action("AddNewAddress","Address")">ثبت آدرس جدید</a>
         <div class="card">
             <div class="card-header">
                 <div class="card-title">لیست آدرس ها</div>
@@ -27,5 +25,3 @@
                 }
             </div>
         </div>
-    </div>
-</div>

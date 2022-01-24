@@ -458,7 +458,7 @@ namespace Sandogh.WebSite.EndPoint.Controllers
 
         private void TransferBasketForuser(string userId)
         {
-            string cookieName = "BasketId";
+            string cookieName = "CartId";
             if (Request.Cookies.ContainsKey(cookieName))
             {
                 var anonymousId = Request.Cookies[cookieName];

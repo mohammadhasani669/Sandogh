@@ -1,0 +1,46 @@
+﻿@{
+    Layout = "_LayoutInsidePages.cshtml";
+}
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-lg-3">
+            <ul class="list-group">
+                <li class="list-group-item  active">
+                    <a id="f1" href="@Url.Action("Index","Address",new {area="Customer" })">آدرس</a>
+                </li>
+                <li id="f2" class="list-group-item"><a href="@Url.Action("AddnewAddress","Address",new {area="Customer" })">آدرس</a></li>
+                <li class="list-group-item">@ViewContext.HttpContext.Request.RouteValues["controller"].ToString().ToLower()</li>
+                <li class="list-group-item">item1</li>
+                <li class="list-group-item">item1</li>
+            </ul>
+        </div>
+        <div class="col-lg-9">
+
+
+            @RenderBody()
+
+
+        </div>
+    </div>
+</div>
+@section Scripts {
+     @await RenderSectionAsync("Scripts", required: false)
+<script>
+    $(document).ready(function() {
+      $('.list-group a').click(function() {
+          debugger;
+        //set localStorage
+        localStorage.setItem("clicked", $(this).attr("id"))
+        //remove from all li
+        $('.list-group a.active').removeClass("active")
+        //Add class to the clicked li
+        $(this).addClass("active")
+      });
+
+      //get class on load
+      var foocus = localStorage.getItem("clicked")
+      foocus ? $("#" + foocus).addClass("active") : $('#home').addClass("active")
+    })
+</script>
+}

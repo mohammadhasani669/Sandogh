@@ -9,7 +9,7 @@ namespace Sandogh.Domain.Carts
         public int Quantity { get; private set; }
         public int ProductId { get; private set; }
         public Product Product { get; private set; }
-        public int BasketId { get; private set; }
+        public int CartId { get; private set; }
         public CartItem(int productId, int quantity, int unitPrice)
         {
             ProductId = productId;

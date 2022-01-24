@@ -106,6 +106,7 @@ namespace Sandogh.Persistance.Carts
         public void TransferBasket(string anonymousId, string UserId)
         {
             var anonymousBasket = _context.Carts
+                .Include(x => x.Items)
                 .SingleOrDefault(p => p.BuyerId == anonymousId);
             if (anonymousBasket == null) return;
             var userBasket = _context.Carts.SingleOrDefault(p => p.BuyerId == UserId);
@@ -119,7 +120,7 @@ namespace Sandogh.Persistance.Carts
             {
                 userBasket.AddItem(item.ProductId, item.Quantity, item.UnitPrice);
             }
-
+            
             _context.Carts.Remove(anonymousBasket);
             _context.SaveChanges();
         }
