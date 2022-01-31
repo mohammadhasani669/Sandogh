@@ -1,0 +1,87 @@
+﻿@model IEnumerable<Sandogh.Application.AdminMenus.Queries.GetAll.GetAllAdminMenuQuery>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">نمایش جدولی</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">نمایش سلسله مراتبی</a>
+    </li>
+
+</ul>
+<div class="tab-content" id="pills-tabContent">
+    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+        <div class="card">
+            <div class="card-body">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>ردیف</th>
+                            <th>عنوان</th>
+                            <th>والد</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            int rowCount = 0;
+                        }
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@(rowCount++)</td>
+                                <td>@item.Name</td>
+                                <td>@Model.FirstOrDefault(x => x.Id == item.ParentId)?.Name</td>
+                                <td>
+                                    <div class="d-flex">
+                                        <a class="btn btn-primary" href="@Url.Action("AddAchildToMenu","AdminMenus",new {parentId = @item.Id})">افزودن زیر منو</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+
+    </div>
+    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+        <div class="card">
+            <div class="card-body">
+                @foreach (var item in Model.Where(x => x.ParentId == null))
+                {
+                    <div class="alert alert-info">@("".PadRight(8,'-')) @item.Name</div>
+                    if (item.SubMenu != null)
+                    {
+                        foreach (var sub1 in item.SubMenu)
+                        {
+                            <div class="alert alert-warning">@("".PadRight(16,'-')) @sub1.Name</div>
+                            if (sub1.SubMenu != null)
+                            {
+                                foreach (var sub2 in sub1.SubMenu)
+                                {
+                                    <div>@("".PadRight(24,'-')) @sub2.Name</div>
+
+                                }
+
+                            }
+                        }
+
+                    }
+                }
+            </div>
+
+        </div>
+
+
+    </div>
+</div>
+
+
+
+

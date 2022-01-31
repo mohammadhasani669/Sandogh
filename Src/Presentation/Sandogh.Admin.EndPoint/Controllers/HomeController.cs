@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Sandogh.Admin.EndPoint.Models;
 using Sandogh.Application.Visitors.GetToDayReport;
+using Sandogh.Domain.AdminMenu;
 using Sandogh.Domain.Users;
 using System;
 using System.Collections.Generic;
@@ -19,16 +20,18 @@ namespace Sandogh.Admin.EndPoint.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private IAdminMenu _menu;
         
         private readonly IGetTodayReportService _getTodayReportService;
         public ResultTodayReportDto ResultTodayReport;
 
-        public HomeController(ILogger<HomeController> logger, IGetTodayReportService getTodayReportService, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
+        public HomeController(ILogger<HomeController> logger, IGetTodayReportService getTodayReportService, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, IAdminMenu menu)
         {
             _logger = logger;
             _getTodayReportService = getTodayReportService;
             _userManager = userManager;
             _roleManager = roleManager;
+            _menu = menu;
         }
 
         [Authorize(Roles ="Admin")]
@@ -70,6 +73,16 @@ namespace Sandogh.Admin.EndPoint.Controllers
                     }
                 }
             }
+        }
+
+        private void InsertMenu()
+        {
+            AdminMenu menu = new AdminMenu 
+            { 
+                Name = "Level01",
+                SubMenu = new List<AdminMenu> { new AdminMenu { Name = "Level02" } }
+            };
+            _menu.Insert(menu);
         }
 
         public IActionResult Privacy()
