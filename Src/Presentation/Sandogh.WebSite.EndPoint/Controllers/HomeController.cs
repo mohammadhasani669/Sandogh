@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Sandogh.WebSite.EndPoint.Controllers
 {
-    [ServiceFilter(typeof(SaveVisitorFilter))]
+    //[ServiceFilter(typeof(SaveVisitorFilter))]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

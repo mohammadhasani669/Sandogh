@@ -80,8 +80,8 @@ namespace Sandogh.WebSite.EndPoint
             services.AddAuthentication()
             .AddGoogle(options =>
             {
-                options.ClientId = configs.GoogleAuthenticationClientId;
-                options.ClientSecret = configs.GoogleAuthenticationClientSecret;
+                options.ClientId = "1";// configs.GoogleAuthenticationClientId;
+                options.ClientSecret = "1";//configs.GoogleAuthenticationClientSecret;
             });
 
             services.AddTransient(typeof(IMongoDbContext<>), typeof(MongoContext<>));

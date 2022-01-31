@@ -35,8 +35,9 @@ namespace Sandogh.Admin.EndPoint.Controllers
         public IActionResult Index()
         {
             //InsertAdminUser();
-            ResultTodayReport = _getTodayReportService.Execute();
-            return View(ResultTodayReport);
+            //ResultTodayReport = _getTodayReportService.Execute();
+            // return View(ResultTodayReport);
+            return View();
         }
 
         private void InsertAdminUser()
