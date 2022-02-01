@@ -16,6 +16,7 @@ using Sandogh.Application.Visitors.GetToDayReport;
 using Sandogh.Domain.AdminMenu;
 using Sandogh.Domain.BankAccounts;
 using Sandogh.Domain.Loans;
+using Sandogh.Domain.Orders;
 using Sandogh.Domain.Products;
 using Sandogh.Domain.Transactions;
 using Sandogh.Infrastructure.IdentityConfigs;
@@ -23,6 +24,7 @@ using Sandogh.Infrastructure.MappingProfile;
 using Sandogh.Persistance.AdminMenus;
 using Sandogh.Persistance.Contexts;
 using Sandogh.Persistance.Loans;
+using Sandogh.Persistance.Orders;
 using Sandogh.Persistance.Products;
 using Sandogh.Persistance.Transactions;
 using System;
@@ -54,15 +56,15 @@ namespace Sandogh.Admin.EndPoint
                 option.AccessDeniedPath = "/Account/AccessDenied";
                 option.SlidingExpiration = true;
             });
-            
 
-            
+
+
 
             services.AddAuthentication();
 
             services.AddTransient<IGetTodayReportService, GetTodayReportService>();
             services.AddTransient(typeof(IMongoDbContext<>), typeof(MongoContext<>));
-            
+
 
             services.AddTransient<IPerson, PersonService>();
             services.AddTransient<IBankAccount, BankAccountService>();
@@ -76,17 +78,18 @@ namespace Sandogh.Admin.EndPoint
             services.AddTransient<IProductImage, ProductImageService>();
             services.AddTransient<ISize, ProductSizeService>();
             services.AddTransient<ITransaction, TransactionService>();
+            services.AddTransient<IOrder, OrderService>();
 
 
             //Add MediatR
             services.AddMediatR(typeof(AddBankAccountCommand).Assembly);
-          
+
 
 
             //mapper
             services.AddAutoMapper(typeof(BankAccountMappingProfile));
 
-         
+
 
         }
 

@@ -8,6 +8,7 @@ using Sandogh.Domain.Emails;
 using Sandogh.Domain.LoanRepayments;
 using Sandogh.Domain.Loans;
 using Sandogh.Domain.Logs;
+using Sandogh.Domain.Orders;
 using Sandogh.Domain.People;
 using Sandogh.Domain.Products;
 using Sandogh.Domain.Transactions;
@@ -41,6 +42,8 @@ namespace Sandogh.Application.Interfaces.Contexts
         DbSet<Cart> Carts { get; set; }
         DbSet<CartItem> CartItems { get; set; }
         DbSet<UserAddress> UserAddresses { get; set; }
+        DbSet<OrderItem> OrderItems { get; set; }
+        DbSet<Order> Orders { get; set; }
 
         int SaveChanges();
         int SaveChanges(bool acceptAllChangesOnSuccess);

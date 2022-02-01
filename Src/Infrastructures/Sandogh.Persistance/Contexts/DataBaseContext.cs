@@ -11,6 +11,7 @@ using Sandogh.Domain.Emails;
 using Sandogh.Domain.LoanRepayments;
 using Sandogh.Domain.Loans;
 using Sandogh.Domain.Logs;
+using Sandogh.Domain.Orders;
 using Sandogh.Domain.People;
 using Sandogh.Domain.Products;
 using Sandogh.Domain.Transactions;
@@ -48,7 +49,10 @@ namespace Sandogh.Persistance.Contexts
         public DbSet<Cart> Carts { get; set; }
         public DbSet<CartItem> CartItems { get; set; }
         public DbSet<UserAddress> UserAddresses { get; set; }
-        
+
+        public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<Order> Orders { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
@@ -75,6 +79,9 @@ namespace Sandogh.Persistance.Contexts
             }
             //modelBuilder.Entity<Brand>().HasQueryFilter(x => !x.IsRemoved);
             #endregion
+
+            //باعث میشه که آدرس رو به عنوان یه جدول دیگه در نظر نگیره
+            modelBuilder.Entity<Order>().OwnsOne(p => p.Address);
 
             base.OnModelCreating(modelBuilder); 
         }
