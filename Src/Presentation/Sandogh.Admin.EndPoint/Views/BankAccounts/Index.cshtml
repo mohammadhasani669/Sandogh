@@ -1,5 +1,9 @@
 ﻿@model Sandogh.Admin.EndPoint.Models.VIewModels.BankAccounts.BankAccountListViewModel
-
+<style>
+.disabled {
+  pointer-events: none;
+}
+</style>
 <div class="card">
     <div class="card-header">
         <div class="row">
@@ -9,7 +13,7 @@
 
             <div class="col-4">
                 <form class="form-inline" asp-action="Index" asp-controller="BankAccounts"
-                      asp-route-pageNumber="@Model.Data.PageInfo.PageNumber">
+                      asp-route-pageNumber="@Model.Data.PageIndex">
 
                     <div class="form-group mx-sm-3 mb-2">
                         <input asp-for="search" class="form-control" placeholder="جستجو..." />
@@ -53,7 +57,7 @@
         </table>
     </div>
     <div class="card-footer">
-        <div page-model="Model.Data.PageInfo"
+        <div page-model ="new PageInfo(){PageSize= Model.Data.PageSize,PageNumber = Model.Data.PageIndex,TotalCount = Model.Data.Count,PageCount = Model.Data.Pager.Pages }"
              page-action="Index"
              page-classes-enabled="true"
              page-class="btn"

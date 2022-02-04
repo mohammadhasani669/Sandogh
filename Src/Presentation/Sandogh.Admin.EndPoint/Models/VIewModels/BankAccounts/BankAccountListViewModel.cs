@@ -7,7 +7,7 @@ namespace Sandogh.Admin.EndPoint.Models.VIewModels.BankAccounts
 {
     public class BankAccountListViewModel
     {
-        public PagedData<BankAccount>  Data{ get; set; }
+        public PaginatedItemsDto<BankAccount>  Data{ get; set; }
         public string search { get; set; }
         public int PageSize { get; set; }
         public List<SelectListItem> PageSizeOptions { get; set; }

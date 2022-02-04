@@ -9,6 +9,7 @@ namespace Sandogh.Domain.Users
 {
     public interface IUserAddress : IRepository<UserAddress>
     {
-       
+        List<UserAddressDto> GetAddress(string UserId);
+        void AddnewAddress(AddUserAddressDto address);
     }
 }

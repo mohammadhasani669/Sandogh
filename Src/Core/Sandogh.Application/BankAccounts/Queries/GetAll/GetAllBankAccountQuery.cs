@@ -4,7 +4,7 @@ using Sandogh.Domain.BankAccounts;
 
 namespace Sandogh.Application.BankAccounts.Queries.GetAll
 {
-    public class GetAllBankAccountQuery :IRequest<PagedData<BankAccount>>
+    public class GetAllBankAccountQuery :IRequest<PaginatedItemsDto<BankAccount>>
     {
         public int pageNumber { get; set; }
         public int pageSize { get; set; }

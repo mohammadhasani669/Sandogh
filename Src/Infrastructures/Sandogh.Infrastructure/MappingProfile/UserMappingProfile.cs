@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Sandogh.Application.Users.Command.Add;
 using Sandogh.Application.Users.Query.GetUserAddress;
+using Sandogh.Domain.Orders;
 using Sandogh.Domain.Users;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,9 @@ namespace Sandogh.Infrastructure.MappingProfile
         public UserMappingProfile()
         {
             CreateMap<UserAddress, UserAddressQuery>().ReverseMap();
-            CreateMap<AddUserAddressCommand, UserAddress>().ReverseMap();
+            CreateMap<UserAddress, UserAddressDto>().ReverseMap();
+            CreateMap<UserAddress, Address>().ReverseMap();
+            CreateMap<AddUserAddressCommand, UserAddress>().ReverseMap(); 
         }
     }
 }

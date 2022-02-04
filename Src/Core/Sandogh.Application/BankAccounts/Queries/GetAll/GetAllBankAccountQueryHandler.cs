@@ -4,7 +4,7 @@ using Sandogh.Domain.BankAccounts;
 
 namespace Sandogh.Application.BankAccounts.Queries.GetAll
 {
-    public class GetAllBankAccountQueryHandler : RequestHandler<GetAllBankAccountQuery, PagedData<BankAccount>>
+    public class GetAllBankAccountQueryHandler : RequestHandler<GetAllBankAccountQuery, PaginatedItemsDto<BankAccount>>
     {
         private readonly IBankAccount _bankAccount;
 
@@ -13,7 +13,7 @@ namespace Sandogh.Application.BankAccounts.Queries.GetAll
             _bankAccount = bankAccount;
         }
 
-        protected override PagedData<BankAccount> Handle(GetAllBankAccountQuery request)
+        protected override PaginatedItemsDto<BankAccount> Handle(GetAllBankAccountQuery request)
         {
             var list = _bankAccount.GetByPaging(request.pageNumber, request.pageSize,request.Search);
             return list;

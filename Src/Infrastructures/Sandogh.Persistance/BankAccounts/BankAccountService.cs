@@ -1,7 +1,9 @@
-﻿using Sandogh.Common;
+﻿using AutoMapper;
+using Sandogh.Common;
 using Sandogh.Persistance.Common;
 using Sandogh.Persistance.Contexts;
 using System;
+using System.Collections;
 using System.Linq;
 
 namespace Sandogh.Domain.BankAccounts
@@ -9,40 +11,24 @@ namespace Sandogh.Domain.BankAccounts
     public class BankAccountService : EfRepository<BankAccount>, IBankAccount
     {
         private readonly DatabaseContext _context;
-        public BankAccountService(DatabaseContext dataBaseContext) : base(dataBaseContext)
+        private readonly IMapper _mapper;
+
+        public BankAccountService(DatabaseContext dataBaseContext, IMapper mapper) : base(dataBaseContext)
         {
             _context = dataBaseContext;
+            _mapper = mapper;
         }
 
-        public PagedData<BankAccount> GetByPaging(int pageNumber, int pageSize, string search)
+        public PaginatedItemsDto<BankAccount> GetByPaging(int pageNumber, int pageSize, string search)
         {
-            var result = new PagedData<BankAccount>()
-            {
-                PageInfo = new PageInfo()
-                {
-                    PageNumber = pageNumber,
-                    PageSize = pageSize,
-                }
-            };
-
-            result.Data = _context.BankAccounts
+            int totalCount = 0;
+            var model = _context.BankAccounts
                 .Where(x => x.BankBranch.Contains(search) || string.IsNullOrWhiteSpace(search))
-                .Skip((pageNumber - 1) * pageSize)
-                .Take(pageSize).ToList();
+                .PagedResult(pageNumber,pageSize,out totalCount).ToList();
 
-            if (result.Data.Count() == 0)
-            {
-                result.PageInfo.PageNumber = 1;
-
-                result.Data = _context.BankAccounts
-               .Where(x => x.BankBranch.Contains(search) || string.IsNullOrWhiteSpace(search))
-               .Skip((1 - 1) * pageSize)
-               .Take(pageSize).ToList();
-            }
-
-            result.PageInfo.TotalCount = _context.BankAccounts
-                .Where(x => x.BankBranch.Contains(search) || string.IsNullOrWhiteSpace(search)).Count();
-            return result;
+            //var result = _mapper.ProjectTo<CatalogTypeListDto>(model).ToList();
+                     
+            return new PaginatedItemsDto<BankAccount>(pageNumber,pageSize, totalCount, model);
         }
     }
 }

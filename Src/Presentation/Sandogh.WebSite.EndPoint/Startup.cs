@@ -18,16 +18,20 @@ using Sandogh.Domain.AdminMenu;
 using Sandogh.Domain.BankAccounts;
 using Sandogh.Domain.Carts;
 using Sandogh.Domain.Loans;
+using Sandogh.Domain.Orders;
 using Sandogh.Domain.Products;
 using Sandogh.Domain.Transactions;
+using Sandogh.Domain.Users;
 using Sandogh.Infrastructure.IdentityConfigs;
 using Sandogh.Infrastructure.MappingProfile;
 using Sandogh.Persistance.AdminMenus;
 using Sandogh.Persistance.Carts;
 using Sandogh.Persistance.Contexts;
 using Sandogh.Persistance.Loans;
+using Sandogh.Persistance.Orders;
 using Sandogh.Persistance.Products;
 using Sandogh.Persistance.Transactions;
+using Sandogh.Persistance.Users;
 using Sandogh.WebSite.EndPoint.Hubs;
 using Sandogh.WebSite.EndPoint.Utilities.Filters;
 using System;
@@ -100,8 +104,10 @@ namespace Sandogh.WebSite.EndPoint
             services.AddTransient<IProductCategory, ProductCategoryService>();
             services.AddTransient<IProductFeature, ProductFeatureService>();
             services.AddTransient<IProductImage, ProductImageService>();
-            services.AddTransient<ISize, ProductSizeService>();
-            services.AddTransient<ITransaction, TransactionService>();
+            services.AddTransient<ISize, ProductSizeService>(); 
+            services.AddTransient<ITransaction, TransactionService>(); 
+            services.AddTransient<IUserAddress, UserAddressService>();
+            services.AddTransient<IOrder, OrderService>();
 
 
             //Add MediatR

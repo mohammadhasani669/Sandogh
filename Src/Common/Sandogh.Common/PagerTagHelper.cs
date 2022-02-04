@@ -32,7 +32,10 @@ namespace Sandogh.Common
         {
             IUrlHelper urlHelper = urlHelperFactory.GetUrlHelper(ViewContext);
             TagBuilder result = new("div");
-            for (int i = 1; i <= PageModel.PageCount; i++)
+
+            PreButton(urlHelper, result);
+
+            foreach (var i in PageModel.PageCount)
             {
                 TagBuilder tag = new("a");
                 tag.Attributes["href"] = urlHelper.Action(PageAction, new { pageSize = PageModel.PageSize, search = PageSearch, pageNumber = i });
@@ -49,6 +52,16 @@ namespace Sandogh.Common
                 result.InnerHtml.AppendHtml(tag);
             }
             output.Content.AppendHtml(result.InnerHtml);
+        }
+
+        private void PreButton(IUrlHelper urlHelper, TagBuilder result)
+        {
+            TagBuilder tagPre = new("a");
+            tagPre.Attributes["href"] = urlHelper.Action(PageAction, new { pageSize = PageModel.PageSize, search = PageSearch, pageNumber = PageModel.PageNumber - 1 });
+            tagPre.AddCssClass(PageModel.PageNumber > 1 ? PageClass : "disabled");
+            tagPre.AddCssClass(PageClassNormal);
+            tagPre.InnerHtml.Append("قبلی");
+            result.InnerHtml.AppendHtml(tagPre);
         }
     }
 }

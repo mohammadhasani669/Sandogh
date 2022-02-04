@@ -22,6 +22,9 @@ namespace Sandogh.Application.AdminMenus.Command.AddToChild
 
         protected override int Handle(AddChildToMenuCommand request)
         {
+
+            //its better include childs and add new child in service and user it here
+
             var parent = _adminMenu.Get(request.ParentId ?? default(int));
             var child = _mapper.Map<AdminMenu>(request);
             parent.SubMenu = new List<AdminMenu>() { child };

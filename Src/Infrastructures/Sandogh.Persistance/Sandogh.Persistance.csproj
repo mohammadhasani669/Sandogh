@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Common\Sandogh.Common\Sandogh.Common.csproj" />
     <ProjectReference Include="..\..\Core\Sandogh.Application\Sandogh.Application.csproj" />
     <ProjectReference Include="..\..\Core\Sandogh.Domain\Sandogh.Domain.csproj" />
   </ItemGroup>
