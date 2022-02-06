@@ -14,6 +14,7 @@ namespace Sandogh.Domain.AdminMenu
 
         public List<AdminMenu> SubMenu { get; set; } 
 
+
         public void AddSub(AdminMenu menu)
         {
             SubMenu.Add(menu);
