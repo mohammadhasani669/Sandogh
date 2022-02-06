@@ -1,5 +1,6 @@
 ﻿using Sandogh.Domain.Common;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Sandogh.Domain.AdminMenu
 {
@@ -7,7 +8,11 @@ namespace Sandogh.Domain.AdminMenu
     {
         public string Name { get; set; }
         public int? ParentId { get; set; }
-        public List<AdminMenu> SubMenu { get; set; } = new List<AdminMenu>();
+
+        [ForeignKey("ParentId")]
+        public virtual AdminMenu Parent { get; set; }
+
+        public List<AdminMenu> SubMenu { get; set; } 
 
         public void AddSub(AdminMenu menu)
         {
