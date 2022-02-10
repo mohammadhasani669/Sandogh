@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Sandogh.Admin.EndPoint.Security.IdentityService;
 using Sandogh.Application.BankAccounts.Command.Add;
 using Sandogh.Application.Emails;
 using Sandogh.Application.Interfaces.Contexts;
@@ -77,8 +78,9 @@ namespace Sandogh.Admin.EndPoint
             services.AddTransient<IProductFeature, ProductFeatureService>();
             services.AddTransient<IProductImage, ProductImageService>();
             services.AddTransient<ISize, ProductSizeService>();
-            services.AddTransient<ITransaction, TransactionService>();
+            services.AddTransient<ITransaction, TransactionService>(); 
             services.AddTransient<IOrder, OrderService>();
+            services.AddTransient<IUtilities, Utilities>();
 
 
             //Add MediatR

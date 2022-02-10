@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Sandogh.Admin.EndPoint.Attributes;
 using Sandogh.Admin.EndPoint.Models.VIewModels.Account;
 using Sandogh.Domain.Users;
+using System.ComponentModel;
 
 namespace Sandogh.Admin.EndPoint.Controllers
 {
@@ -17,6 +19,7 @@ namespace Sandogh.Admin.EndPoint.Controllers
             _signInManager = signInManager;
         }
 
+        [PermissionAttribute(Title ="لاگین")]
         public IActionResult Login(string returnUrl= "/")
         {
             if (User.Identity.IsAuthenticated)
@@ -27,6 +30,7 @@ namespace Sandogh.Admin.EndPoint.Controllers
         }
 
         [HttpPost]
+      
         public IActionResult Login(LoginViewModel model)
         {
             if (!ModelState.IsValid)
