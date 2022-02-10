@@ -19,7 +19,7 @@ namespace Sandogh.Admin.EndPoint.Controllers
             _signInManager = signInManager;
         }
 
-        [PermissionAttribute(Title ="لاگین")]
+        [PermissionName(Title ="لاگین")]
         public IActionResult Login(string returnUrl= "/")
         {
             if (User.Identity.IsAuthenticated)
@@ -30,7 +30,6 @@ namespace Sandogh.Admin.EndPoint.Controllers
         }
 
         [HttpPost]
-      
         public IActionResult Login(LoginViewModel model)
         {
             if (!ModelState.IsValid)

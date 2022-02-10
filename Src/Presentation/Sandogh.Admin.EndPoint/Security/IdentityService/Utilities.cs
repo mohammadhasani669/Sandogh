@@ -27,7 +27,7 @@ namespace Sandogh.Admin.EndPoint.Security.IdentityService
                     Action = x.Name,
                     Area = x.DeclaringType?.CustomAttributes.Where(c => c.AttributeType == typeof(AreaAttribute)),
                     Description = x.CustomAttributes
-                    .Where(x => x.AttributeType == typeof(PermissionAttribute))
+                    .Where(x => x.AttributeType == typeof(PermissionNameAttribute))
                     .FirstOrDefault()?.NamedArguments,
                 });
 

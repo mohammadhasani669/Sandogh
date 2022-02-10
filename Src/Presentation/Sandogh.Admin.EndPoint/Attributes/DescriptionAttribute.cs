@@ -2,7 +2,7 @@
 
 namespace Sandogh.Admin.EndPoint.Attributes
 {
-    public class PermissionAttribute : Attribute
+    public class PermissionNameAttribute : Attribute
     {
         public string Title { get; set; }
     }

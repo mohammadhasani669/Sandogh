@@ -49,7 +49,7 @@ namespace Sandogh.Admin.EndPoint.Controllers
         }
 
         [HttpPost]
-        [PermissionAttribute(Title = "ساخت")]
+        [PermissionName(Title = "ساخت")]
         public async Task<IActionResult> CreateRole(CreateRoleViewModel model)
         {
             if (ModelState.IsValid)
