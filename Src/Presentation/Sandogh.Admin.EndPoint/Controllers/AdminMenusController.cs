@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using DNTBreadCrumb.Core;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Sandogh.Application.AdminMenus.Command.Add;
@@ -9,6 +10,7 @@ using System.Collections.Generic;
 
 namespace Sandogh.Admin.EndPoint.Controllers
 {
+    [BreadCrumb(Title = "منوها", UseDefaultRouteUrl = true,Order = 0, IgnoreAjaxRequests = true,Url ="/")]
     public class AdminMenusController : Controller
     {
         private readonly IMediator _mediator;
@@ -22,6 +24,7 @@ namespace Sandogh.Admin.EndPoint.Controllers
             _mapper = mapper;
         }
 
+        [BreadCrumb(Title = "لیست", Order = 1, IgnoreAjaxRequests = true,Url ="AdminMenus/index")]
         public IActionResult Index()
         {
             var req = new GetAllAdminMenuQuery();
@@ -45,8 +48,6 @@ namespace Sandogh.Admin.EndPoint.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-
-
         public IActionResult Create()
         {
             return View();
@@ -58,7 +59,6 @@ namespace Sandogh.Admin.EndPoint.Controllers
         {
             var result = _mediator.Send(addAdminMenuCommand);
             return RedirectToAction(nameof(Index));
-
         }
     }
 }

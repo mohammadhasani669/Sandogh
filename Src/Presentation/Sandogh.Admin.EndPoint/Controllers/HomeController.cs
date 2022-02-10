@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using DNTBreadCrumb.Core;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -14,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace Sandogh.Admin.EndPoint.Controllers
 {
-    
+    [BreadCrumb(Title = "داشبورد", UseDefaultRouteUrl = true, Order = 0, IgnoreAjaxRequests = true)]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -35,6 +36,7 @@ namespace Sandogh.Admin.EndPoint.Controllers
         }
 
         [Authorize(Roles ="Admin")]
+        [BreadCrumb(Title = "لسیت", Order = 1, IgnoreAjaxRequests = true)]
         public IActionResult Index()
         {
             //InsertAdminUser();
