@@ -4,6 +4,7 @@ using Microsoft.Extensions.Caching.Memory;
 using Sandogh.Admin.EndPoint.Attributes;
 using Sandogh.Admin.EndPoint.Models.VIewModels.Roles;
 using Sandogh.Admin.EndPoint.Security.IdentityService;
+using Sandogh.Domain.Users;
 using System;
 using System.Linq;
 using System.Security.Claims;
@@ -14,14 +15,16 @@ namespace Sandogh.Admin.EndPoint.Controllers
     public class RoleController : Controller
     {
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly IUtilities _utilities;
         private readonly IMemoryCache _memoryCache;
 
-        public RoleController(RoleManager<IdentityRole> roleManager, IUtilities utilities, IMemoryCache memoryCache)
+        public RoleController(RoleManager<IdentityRole> roleManager, IUtilities utilities, IMemoryCache memoryCache, UserManager<ApplicationUser> userManager)
         {
             _roleManager = roleManager;
             _utilities = utilities;
             _memoryCache = memoryCache;
+            _userManager = userManager;
         }
 
 
@@ -69,7 +72,7 @@ namespace Sandogh.Admin.EndPoint.Controllers
             {
                 return RedirectToAction(nameof(Index));
             }
-
+            UpdateSecurityStamps(model.Id);
             ModelState.AddModelError(string.Empty, "خطا در ویرایش");
             return View(model);
         }
@@ -124,17 +127,36 @@ namespace Sandogh.Admin.EndPoint.Controllers
         }
 
         [HttpGet]
-        public IActionResult CreateOrEditRoleClaim()
+        public IActionResult CreateOrEditRoleClaim(string id)
         {
+            var role = _roleManager.Roles.FirstOrDefault(x => x.Id == id);
+            if (role == null)
+                return View();
+
+            var roleClaims = _roleManager.GetClaimsAsync(role).Result.ToList();
+
             var allMvcNames =
-                _memoryCache.GetOrCreate("AreaAndActionAndControllerNamesList", p =>
-                {
-                    p.AbsoluteExpiration = DateTimeOffset.MaxValue;
-                    return _utilities.AreaAndActionAndControllerNamesList();
-                });
+              _memoryCache.GetOrCreate("AreaAndActionAndControllerNamesList", p =>
+              {
+                  p.AbsoluteExpiration = DateTimeOffset.MaxValue;
+                  return _utilities.AreaAndActionAndControllerNamesList();
+              });
+
+            allMvcNames = allMvcNames
+             .GroupBy(x => new { x.ControllerName, x.ActionName, x.Description })
+             .Select(g => new ActionAndControllerName
+             {
+                 ActionName = g.Key.ActionName,
+                 ControllerName = g.Key.ControllerName,
+                 Description = g.Key.Description
+             }).ToList();
+
             var model = new CreateOrEditRoleCalimViewModel()
             {
-                ActionAndControllerNames = allMvcNames
+                RoleId = id,
+                RoleName = role.Name,
+                ActionAndControllerNames = allMvcNames,
+                RoleCailms = roleClaims
             };
 
             return View(model);
@@ -146,33 +168,41 @@ namespace Sandogh.Admin.EndPoint.Controllers
         {
             if (ModelState.IsValid)
             {
-                var role = new IdentityRole(model.RoleName);
-                var result = await _roleManager.CreateAsync(role);
-                if (result.Succeeded)
+                var role = _roleManager.FindByIdAsync(model.RoleId).Result;
+
+                if (role != null)
                 {
                     var requestRoles =
                         model.ActionAndControllerNames.Where(c => c.IsSelected).ToList();
+
+                    var roleClaims = _roleManager.GetClaimsAsync(role).Result.ToList();
+                    foreach (var claim in roleClaims)
+                    {
+                        await _roleManager.RemoveClaimAsync(role, claim);
+                    }
                     foreach (var requestRole in requestRoles)
                     {
-                        var areaName = (string.IsNullOrEmpty(requestRole.AreaName)) ?
-                            "NoArea" : requestRole.AreaName;
 
                         await _roleManager.AddClaimAsync(role,
-                            new Claim($"{areaName}|{requestRole.ControllerName}|{requestRole.ActionName}".ToUpper(),
+                            new Claim($"{requestRole.ControllerName}|{requestRole.ActionName}".ToUpper(),
                                 true.ToString()));
                     }
-
-
-                    return RedirectToAction("Index");
-                }
-
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError("", error.Description);
+                    UpdateSecurityStamps(model.RoleId);
+                    return RedirectToAction(nameof(Index));
                 }
             }
 
             return View(model);
+        }
+
+        private void UpdateSecurityStamps(string roleId)
+        {
+            var RoleName = _roleManager.FindByIdAsync(roleId).Result;
+            var users = _userManager.GetUsersInRoleAsync(RoleName.Name).Result;
+            foreach (var user in users)
+            {
+                _userManager.UpdateSecurityStampAsync(user).Wait();
+            }
         }
 
     }
