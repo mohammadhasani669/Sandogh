@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace Sandogh.Admin.EndPoint.Controllers
 {
-    [BreadCrumb(Title = "منوها", UseDefaultRouteUrl = true,Order = 0, IgnoreAjaxRequests = true,Url ="/")]
+    [BreadCrumb(Title = "منوها",Url ="/AdminMenus/Index")]
     public class AdminMenusController : Controller
     {
         private readonly IMediator _mediator;
@@ -24,7 +24,7 @@ namespace Sandogh.Admin.EndPoint.Controllers
             _mapper = mapper;
         }
 
-        [BreadCrumb(Title = "لیست", Order = 1, IgnoreAjaxRequests = true,Url ="AdminMenus/index")]
+        [BreadCrumb(Title = "لیست")]
         public IActionResult Index()
         {
             var req = new GetAllAdminMenuQuery();
