@@ -24,15 +24,107 @@ namespace Sandogh.Admin.EndPoint.Controllers
             _memoryCache = memoryCache;
         }
 
-       
+
 
         public IActionResult Index()
+        {
+            var roles = _roleManager.Roles.ToList();
+            return View(roles);
+        }
+
+        public IActionResult Edit(string id)
+        {
+            var model = new EditRoleModel();
+            var role = _roleManager.Roles.FirstOrDefault(x => x.Id == id);
+            if (role == null)
+            {
+                ModelState.AddModelError(string.Empty, "نقش یافت نشد!");
+                return View(model);
+            }
+            model.Id = role.Id;
+            model.RoleName = role.Name;
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(EditRoleModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError(string.Empty, "خطا در ویرایش");
+                return View(model);
+            }
+            var role = _roleManager.Roles.FirstOrDefault(x => x.Id == model.Id);
+            if (role == null)
+            {
+                ModelState.AddModelError(string.Empty, "نقش یافت نشد!");
+                return View(model);
+            }
+            role.Name = model.RoleName;
+
+            var result = _roleManager.UpdateAsync(role).Result;
+            if (result.Succeeded)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            ModelState.AddModelError(string.Empty, "خطا در ویرایش");
+            return View(model);
+        }
+
+        public IActionResult Create()
         {
             return View();
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(CreateRoleModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var role = new IdentityRole
+                {
+                    Name = model.RoleName
+                };
+                var result = await _roleManager.CreateAsync(role);
+                if (result.Succeeded)
+                {
+                    TempData["Message"] = "Role Created";
+                    return RedirectToAction(nameof(Index));
+                }
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(string Id)
+        {
+            var role = _roleManager.Roles.SingleOrDefault(x => x.Id == Id);
+            if (role != null)
+            {
+                try
+                {
+                    var result = _roleManager.DeleteAsync(role).Result;
+                }
+                catch (Exception)
+                {
+                    TempData["Error"] = "خطا در حذف ";
+                    RedirectToAction(nameof(Index));
+                }
+            }
+            return RedirectToAction(nameof(Index));
+        }
+
         [HttpGet]
-        public IActionResult CreateRole()
+        public IActionResult CreateOrEditRoleClaim()
         {
             var allMvcNames =
                 _memoryCache.GetOrCreate("AreaAndActionAndControllerNamesList", p =>
@@ -40,7 +132,7 @@ namespace Sandogh.Admin.EndPoint.Controllers
                     p.AbsoluteExpiration = DateTimeOffset.MaxValue;
                     return _utilities.AreaAndActionAndControllerNamesList();
                 });
-            var model = new CreateRoleViewModel()
+            var model = new CreateOrEditRoleCalimViewModel()
             {
                 ActionAndControllerNames = allMvcNames
             };
@@ -50,7 +142,7 @@ namespace Sandogh.Admin.EndPoint.Controllers
 
         [HttpPost]
         [PermissionName(Title = "ساخت")]
-        public async Task<IActionResult> CreateRole(CreateRoleViewModel model)
+        public async Task<IActionResult> CreateOrEditRoleClaim(CreateOrEditRoleCalimViewModel model)
         {
             if (ModelState.IsValid)
             {

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Sandogh.Admin.EndPoint.Models.VIewModels.Roles
 {
-    public class CreateRoleViewModel
+    public class CreateOrEditRoleCalimViewModel
     {
-        public CreateRoleViewModel()
+        public CreateOrEditRoleCalimViewModel()
         {
             ActionAndControllerNames = new List<ActionAndControllerName>();
         }

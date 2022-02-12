@@ -1,0 +1,54 @@
+﻿@model Sandogh.Admin.EndPoint.Models.VIewModels.Users.EditUserRolesViewModel
+
+@{
+    ViewData["Title"] = "ویرایش  کاربر";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-8">
+        <form method="post" asp-action="EditUserRoles">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="@Model.UserId" />
+            <div class="card">
+                <div class="card-header bg-primary">
+                    <div class="card-title"> نام کاربری: @Model.UserName -  ویرایش کاربر</div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            @foreach (var role in Model.Roles)
+                            {
+                                <div class="form-group">
+                                    <input type="checkbox" value="@role.Name" name="roles" checked="@Model.UserRoles.Any(c=>role.Name == c)" />
+                                    @role.Name
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <input type="submit" value="ثبت" class="btn btn-primary" />
+                                <a class="btn btn-warning" asp-action="Index">بازگشت به لیست</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+          
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+}
+
+
+

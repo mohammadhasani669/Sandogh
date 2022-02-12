@@ -1,0 +1,73 @@
+﻿@model IEnumerable<IdentityRole>
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]?.ToString()</div>
+}
+
+<p>
+    <a class="btn btn-success" href="@this.Url.Action("Create","Roles")">ثبت نقش جدید</a>
+</p>
+
+<div class="card">
+    <div class="card-header bg-primary">
+        <div class="card-title">لیست  نقش ها</div>
+    </div>
+    <div class="card-body">
+        <table class="table table-bordered table-striped" id="TblCommon">
+            <thead>
+                <tr>
+                    <th>ردیف</th>
+                    <th>نام نقش</th>
+                  
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int countRow = 1;
+                }
+                @foreach (var role in Model)
+                {
+                    <tr>
+                        <td>@(countRow++)</td>
+                        <td>@role.Name</td>
+                        <td>
+                            <div class="row">
+                                <a class="btn btn-warning mx-1" href="@this.Url.Action("Edit","Roles",new {Id = role.Id})">ویرایش </a>
+                                <form asp-action="Delete" method="post" onclick="DeleteMenu(this)">
+                                    <input type="hidden" name="Id" value="@role.Id">
+                                    <button type="button" class="btn btn-danger mx-1">حذف</button>
+                                </form>
+                                <a class="btn btn-warning mx-1" 
+                                href="@this.Url.Action("CreateOrEditRoleClaims","Roles",new {Id = role.Id})">دسترسی نقش </a>
+
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+@section Styles{
+
+@*<link rel="stylesheet" type="text/css" href="/Theme/plugins/datatables/dataTables.bootstrap4.min.css">*@
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap4.min.css">
+}
+
+@section Scripts {
+<link href="~/lib/Sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+<script src="~/lib/Sweetalert2/sweetalert2.min.js"></script>
+
+<script src="/Theme/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="/Theme/plugins/datatables/dataTables.bootstrap4.min.js"></script>
+    @{
+       await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+<script src=~/js/Common/CommonConfig.js asp-append-version="true"></script>
+
+}

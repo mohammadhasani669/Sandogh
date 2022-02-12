@@ -1,0 +1,54 @@
+﻿
+@model  Sandogh.Admin.EndPoint.Models.VIewModels.Roles.EditRoleModel
+@{
+    ViewData["Title"] = "ویرایش  نقش";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-8">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id"/>
+            <div class="card">
+                <div class="card-header bg-primary">
+                    <div class="card-title">ویرایش نقش</div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label asp-for="RoleName" class="control-label"></label>
+                                <input asp-for="RoleName" class="form-control" />
+                                <span asp-validation-for="RoleName" class="text-danger"></span>
+                            </div>
+                        </div>
+                   
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <input type="submit" value="ویرایش" class="btn btn-primary" />
+                                <a class="btn btn-warning" asp-action="Index">بازگشت به لیست</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+}
+
+
+
+
+

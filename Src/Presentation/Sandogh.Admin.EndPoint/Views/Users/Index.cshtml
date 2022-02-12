@@ -1,0 +1,78 @@
+﻿@model IEnumerable<Sandogh.Domain.Users.ApplicationUser>
+
+<p>
+
+    <a class="btn btn-success" href="@this.Url.Action("Create","Users")">ثبت کاربر جدید</a>
+</p>
+@if (TempData["msg"] != null)
+{
+    <div class="alert alert-success">@TempData["msg"]?.ToString()</div>
+}
+ 
+<div class="card">
+    <div class="card-header bg-primary">
+        <div class="card-title">لیست  کاربران</div>
+    </div>
+    <div class="card-body">
+        <table class="table table-bordered table-striped" id="TblCommon">
+            <thead>
+                <tr>
+                    <th>ردیف</th>
+                    <th>نام کاربری</th>
+                    <th>موبایل</th>
+                    <th>نام</th>
+                    <th>نام خانوادگی</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int countRow = 1;
+                }
+                @foreach (var user in Model)
+                {
+                    <tr>
+                        <td>@(countRow++)</td>
+                        <td>@user.UserName</td>
+                        <td>@user.PhoneNumber</td>
+                        <td>@user.FirstName</td>
+                        <td>@user.LastName</td>
+                        <td>
+                            <div class="row">
+                                <a class="btn btn-warning mx-1" href="@this.Url.Action("Edit","Users",new {Id = user.Id})">ویرایش </a>
+                                <form asp-action="Delete" method="post" onclick="DeleteMenu(this)">
+                                    <input type="hidden" name="Id" value="@user.Id">
+                                    <button type="button" class="btn btn-danger mx-1">حذف</button>
+                                </form>
+                                <a asp-action="EditUserRoles" asp-controller="Users" asp-route-id="@user.Id" class="btn btn-info">نقش کاربر</a>
+                                <a asp-action="ResetPassword" asp-controller="Users" asp-route-id="@user.Id" class="btn btn-dark mx-1">بازنشانی رمز عبور</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+@section Styles{
+
+@*<link rel="stylesheet" type="text/css" href="/Theme/plugins/datatables/dataTables.bootstrap4.min.css">*@
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap4.min.css">
+}
+
+@section Scripts {
+<link href="~/lib/Sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+<script src="~/lib/Sweetalert2/sweetalert2.min.js"></script>
+<script src="~/theme/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<script src="/Theme/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="/Theme/plugins/datatables/dataTables.bootstrap4.min.js"></script>
+    @{
+       await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+<script src=~/js/Common/CommonConfig.js asp-append-version="true"></script>
+
+}
