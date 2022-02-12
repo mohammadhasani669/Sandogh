@@ -24,6 +24,11 @@ namespace Sandogh.Persistance.Common
             return dbContext.Set<TEntity>().Any(expression);
         }
 
+        public IEnumerable<TEntity> Condition(Expression<Func<TEntity, bool>> expression)
+        {
+            return dbContext.Set<TEntity>().Where(expression).ToList();
+        }
+
         public TEntity Get(int id)
         {
             return dbContext.Set<TEntity>().FirstOrDefault(c => c.Id == id);

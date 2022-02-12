@@ -13,5 +13,6 @@ namespace Sandogh.Domain.Common
         TEntity Get(int id);
         IEnumerable<TEntity> GetAll();
         bool Exists(Expression<Func<TEntity, bool>> expression);
+        IEnumerable<TEntity> Condition(Expression<Func<TEntity, bool>> expression);
     }
 }
