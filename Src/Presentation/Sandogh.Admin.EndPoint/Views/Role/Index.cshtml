@@ -34,13 +34,13 @@
                         <td>@role.Name</td>
                         <td>
                             <div class="row">
-                                <a class="btn btn-warning mx-1" href="@this.Url.Action("Edit","Roles",new {Id = role.Id})">ویرایش </a>
+                                <a class="btn btn-warning mx-1" href="@this.Url.Action("Edit","Role",new {Id = role.Id})">ویرایش </a>
                                 <form asp-action="Delete" method="post" onclick="DeleteMenu(this)">
                                     <input type="hidden" name="Id" value="@role.Id">
                                     <button type="button" class="btn btn-danger mx-1">حذف</button>
                                 </form>
                                 <a class="btn btn-warning mx-1" 
-                                href="@this.Url.Action("CreateOrEditRoleClaims","Roles",new {Id = role.Id})">دسترسی نقش </a>
+                                href="@this.Url.Action("CreateOrEditRoleClaim","Role",new {Id = role.Id})">دسترسی نقش </a>
 
                             </div>
                         </td>

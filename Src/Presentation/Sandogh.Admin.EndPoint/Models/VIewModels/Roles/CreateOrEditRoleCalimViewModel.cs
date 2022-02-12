@@ -16,7 +16,7 @@ namespace Sandogh.Admin.EndPoint.Models.VIewModels.Roles
 
         public string RoleId { get; set; }
 
-        [Required()]
+      
         [Display(Name = "نام مقام")]
         public string RoleName { get; set; }
         public IList<ActionAndControllerName> ActionAndControllerNames { get; set; }

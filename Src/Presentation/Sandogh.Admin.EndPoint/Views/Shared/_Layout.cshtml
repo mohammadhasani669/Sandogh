@@ -24,11 +24,13 @@
     <!-- summernote -->
     <link rel="stylesheet" href="~/theme/plugins/summernote/summernote-bs4.css">
     <!-- Google Font: Source Sans Pro -->
-  @*  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">*@
+    @*  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">*@
     <!-- Bootstrap 4 RTL -->
     <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.2.1/css/bootstrap.min.css">
     <!-- Custom style for RTL -->
     <link rel="stylesheet" href="~/theme/dist/css/custom.css">
+    @await RenderSectionAsync("Styles", required: false)
+
     <style>
         .card-title {
             float: right;
@@ -53,15 +55,15 @@
                             <h1 class="m-0 text-dark">Dashboard</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
-                             <breadcrumb asp-homepage-title="پنل مدیریت"
-                                asp-homepage-url="@Url.Action("Index", "Home", values: new { area = "" })"
-                                asp-bootstrap-version="V4"
-                                 asp-homepage-glyphicon="glyphicon glyphicon-home"></breadcrumb>
+                            <breadcrumb asp-homepage-title="پنل مدیریت"
+                                        asp-homepage-url="@Url.Action("Index", "Home", values: new { area = "" })"
+                                        asp-bootstrap-version="V4"
+                                        asp-homepage-glyphicon="glyphicon glyphicon-home"></breadcrumb>
 
-                           @* <ol class="breadcrumb float-sm-right">
+                            @* <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
                                 <li class="breadcrumb-item active">Dashboard v1</li>
-                            </ol>*@
+                                </ol>*@
                         </div><!-- /.col -->
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
@@ -125,6 +127,7 @@
     <script src="~/theme/dist/js/pages/dashboard.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="~/theme/dist/js/demo.js"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

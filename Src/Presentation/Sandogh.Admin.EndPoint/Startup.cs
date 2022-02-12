@@ -131,12 +131,14 @@ namespace Sandogh.Admin.EndPoint
                     pattern: "{controller=Home}/{action=Index}/Page{PageNumber}");
 
                 endpoints.MapControllerRoute(
+                   name: "default",
+                   pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapControllerRoute(
                   name: "pagination",
                   pattern: "{controller=Home}/{action=Index}/{search}");
 
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+               
             });
         }
     }
