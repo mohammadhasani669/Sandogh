@@ -3,4 +3,17 @@
 }
 <h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<textarea id="Description"></textarea>
+
+
+
+<script src="~/lib/ckeditor/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace('Description', {
+        language: 'fa',
+        contentsLangDirection: 'rtl',
+        height: 270,
+        filebrowserBrowseUrl : '/Home/myFileManager',
+        //filebrowserUploadMethod = 'form',
+    });
+</script>
