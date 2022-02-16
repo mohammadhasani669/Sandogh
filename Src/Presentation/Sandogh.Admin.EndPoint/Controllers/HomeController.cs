@@ -42,6 +42,7 @@ namespace Sandogh.Admin.EndPoint.Controllers
             //InsertAdminUser();
             //ResultTodayReport = _getTodayReportService.Execute();
             // return View(ResultTodayReport);
+            _logger.LogInformation("this is test");
             return View();
         }
 

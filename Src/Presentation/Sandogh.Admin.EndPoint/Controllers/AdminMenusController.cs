@@ -35,7 +35,7 @@ namespace Sandogh.Admin.EndPoint.Controllers
             return View(result);
         }
 
-
+        [PermissionName(Title = Names.AdminMenuAddChild, Category = Names.AdminMenu)]
         public IActionResult AddAchildToMenu(int parentId)
         {
             var parent = _adminMenu.Get(parentId);
@@ -51,6 +51,7 @@ namespace Sandogh.Admin.EndPoint.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [PermissionName(Title = Names.AdminMenuCreate, Category = Names.AdminMenu)]
         public IActionResult Create()
         {
             return View();

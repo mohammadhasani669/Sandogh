@@ -1,6 +1,8 @@
 ﻿
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Sandogh.Admin.EndPoint.Attributes;
+using Sandogh.Admin.EndPoint.Models;
 using Sandogh.Admin.EndPoint.Models.VIewModels.Account;
 using Sandogh.Admin.EndPoint.Models.VIewModels.Users;
 using Sandogh.Common;
@@ -23,12 +25,14 @@ namespace Sandogh.Admin.EndPoint.Controllers
             _roleManager = roleManager;
         }
 
+        [PermissionName(Title = Names.UserList, Category = Names.Users)]
         public IActionResult Index()
         {
             var model = _userManager.Users.ToList();
             return View(model);
         }
 
+        [PermissionName(Title = Names.UserCreate, Category = Names.Users)]
         public IActionResult Create()
         {
             return View();
@@ -60,6 +64,7 @@ namespace Sandogh.Admin.EndPoint.Controllers
             return View();
         }
 
+        [PermissionName(Title = Names.UserEdit, Category = Names.Users)]
         public IActionResult Edit(string id)
         {
 
@@ -139,6 +144,7 @@ namespace Sandogh.Admin.EndPoint.Controllers
             return RedirectToAction("Index", "Users");
         }
 
+        [PermissionName(Title = Names.UserResetPassword, Category = Names.Users)]
         public IActionResult ResetPassword(string id)
         {
             var user = _userManager.FindByIdAsync(id).Result;
@@ -188,6 +194,8 @@ namespace Sandogh.Admin.EndPoint.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+
+        [PermissionName(Title = Names.UserDelete, Category = Names.Users)]
         public IActionResult Delete(string id)
         {
             var user = _userManager.FindByIdAsync(id).Result;

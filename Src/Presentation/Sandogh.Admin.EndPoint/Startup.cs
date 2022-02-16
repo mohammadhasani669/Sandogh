@@ -30,6 +30,7 @@ using Sandogh.Persistance.Orders;
 using Sandogh.Persistance.Products;
 using Sandogh.Persistance.Transactions;
 using System;
+using Serilog;
 
 namespace Sandogh.Admin.EndPoint
 {
@@ -121,7 +122,7 @@ namespace Sandogh.Admin.EndPoint
                     context.HttpContext.Response.Redirect("/Error/PageNotFound");
                 }
             });
-
+         
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

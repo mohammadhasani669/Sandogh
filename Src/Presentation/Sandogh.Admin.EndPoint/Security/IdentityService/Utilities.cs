@@ -29,6 +29,9 @@ namespace Sandogh.Admin.EndPoint.Security.IdentityService
                     Description = x.CustomAttributes
                     .Where(x => x.AttributeType == typeof(PermissionNameAttribute))
                     .FirstOrDefault()?.NamedArguments,
+                    Category = x.CustomAttributes
+                    .Where(x => x.AttributeType == typeof(PermissionNameAttribute))
+                    .LastOrDefault()?.NamedArguments,
                 });
 
             contradistinction = contradistinction.Where(x => x.Description?.Count > 0).ToList();
@@ -46,6 +49,7 @@ namespace Sandogh.Admin.EndPoint.Security.IdentityService
                         ActionName = item.Action,
                         AreaName = item.Area.Select(v => v.ConstructorArguments[0].Value.ToString()).FirstOrDefault(),
                         Description = item.Description?.FirstOrDefault().TypedValue.Value?.ToString(),
+                        Category = item.Description?.LastOrDefault().TypedValue.Value?.ToString(),
                     });
                 }
                 else
@@ -56,6 +60,8 @@ namespace Sandogh.Admin.EndPoint.Security.IdentityService
                         ActionName = item.Action,
                         AreaName = null,
                         Description = item.Description?.FirstOrDefault().TypedValue.Value?.ToString(),
+                        Category = item.Description?.LastOrDefault().TypedValue.Value?.ToString(),
+
                     });
                 }
             }

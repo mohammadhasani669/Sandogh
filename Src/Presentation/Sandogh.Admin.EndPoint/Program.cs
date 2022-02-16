@@ -21,7 +21,7 @@ namespace Sandogh.Admin.EndPoint
                 .ReadFrom.Configuration(configuretion).CreateLogger();
             try
             {
-                Log.Information("Starting web host");
+               
                 CreateHostBuilder(args).Build().Run();
                 return 0;
             }
@@ -38,6 +38,7 @@ namespace Sandogh.Admin.EndPoint
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .UseSerilog()
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
