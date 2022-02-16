@@ -142,14 +142,13 @@ namespace Sandogh.Admin.EndPoint.Controllers
                   return _utilities.AreaAndActionAndControllerNamesList();
               });
 
-            allMvcNames = allMvcNames
-             .GroupBy(x => new { x.ControllerName, x.ActionName, x.Description })
-             .Select(g => new ActionAndControllerName
-             {
-                 ActionName = g.Key.ActionName,
-                 ControllerName = g.Key.ControllerName,
-                 Description = g.Key.Description
-             }).ToList();
+            int counter = 0;
+            foreach (var claim in allMvcNames)
+            {
+                claim.Index = counter++;
+            }
+
+         
 
             var model = new CreateOrEditRoleCalimViewModel()
             {

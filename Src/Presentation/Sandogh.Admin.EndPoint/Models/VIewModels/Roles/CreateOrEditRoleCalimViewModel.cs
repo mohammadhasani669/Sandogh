@@ -25,10 +25,12 @@ namespace Sandogh.Admin.EndPoint.Models.VIewModels.Roles
 
     public class ActionAndControllerName
     {
+        public int Index { get; set; }
         public string AreaName { get; set; }
         public string ActionName { get; set; }
         public string ControllerName { get; set; }
         public string Description { get; set; }
+        public string? Category { get; set; }
         public string Claim => $"{ControllerName}|{ActionName}".ToUpper();
         public bool IsSelected { get; set; }
     }

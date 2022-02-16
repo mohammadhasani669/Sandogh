@@ -2,6 +2,8 @@
 using DNTBreadCrumb.Core;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Sandogh.Admin.EndPoint.Attributes;
+using Sandogh.Admin.EndPoint.Models;
 using Sandogh.Application.AdminMenus.Command.Add;
 using Sandogh.Application.AdminMenus.Command.AddToChild;
 using Sandogh.Application.AdminMenus.Queries.GetAll;
@@ -25,6 +27,7 @@ namespace Sandogh.Admin.EndPoint.Controllers
         }
 
         [BreadCrumb(Title = "لیست")]
+        [PermissionName(Title = Names.AdminMenuList, Category = Names.AdminMenu)]
         public IActionResult Index()
         {
             var req = new GetAllAdminMenuQuery();

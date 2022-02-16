@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Sandogh.Admin.EndPoint.Attributes;
+using Sandogh.Admin.EndPoint.Models;
 using Sandogh.Admin.EndPoint.Models.VIewModels.Account;
 using Sandogh.Domain.Users;
 using System.ComponentModel;
@@ -19,7 +20,7 @@ namespace Sandogh.Admin.EndPoint.Controllers
             _signInManager = signInManager;
         }
 
-        [PermissionName(Title ="لاگین")]
+      
         public IActionResult Login(string returnUrl= "/")
         {
             if (User.Identity.IsAuthenticated)
