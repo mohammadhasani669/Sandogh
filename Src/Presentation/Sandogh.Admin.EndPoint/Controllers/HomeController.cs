@@ -46,6 +46,8 @@ namespace Sandogh.Admin.EndPoint.Controllers
             return View();
         }
 
+        
+
         private void InsertAdminUser()
         {
             var AdminExist = _userManager.Users.Any(x => x.Email.ToUpper() == "MOHAMMADHASANI669@GMAIL.COM");
@@ -89,6 +91,11 @@ namespace Sandogh.Admin.EndPoint.Controllers
         }
 
         public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        public IActionResult myTinyMCE()
         {
             return View();
         }
