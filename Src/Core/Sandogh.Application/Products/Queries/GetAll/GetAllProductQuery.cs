@@ -19,5 +19,6 @@ namespace Sandogh.Application.Products.Queries.GetAll
         public int Price { get; set; }
         public string Image { get; set; }
         public byte Rate { get; set; }
+        public string search { get; set; }
     }
 }

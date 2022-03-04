@@ -14,11 +14,12 @@ namespace Sandogh.WebSite.EndPoint.Controllers
             _mediator = mediator;
         }
 
-        public IActionResult Index(int page = 1, int pageSize = 20)
+        public IActionResult Index(string search = "", int pageNumber = 1, int pageSize = 2)
         {
             GetAllProductQuery getAll = new GetAllProductQuery();
             getAll.pageSize = pageSize;
-            getAll.page = page;
+            getAll.page = pageNumber;
+            getAll.search = search;
             var result = _mediator.Send(getAll).Result;
 
             return View(result);

@@ -51,6 +51,8 @@ namespace Sandogh.Common
                 tag.InnerHtml.Append(i.ToString());
                 result.InnerHtml.AppendHtml(tag);
             }
+            NextButton(urlHelper, result);
+
             output.Content.AppendHtml(result.InnerHtml);
         }
 
@@ -61,6 +63,16 @@ namespace Sandogh.Common
             tagPre.AddCssClass(PageModel.PageNumber > 1 ? PageClass : "disabled");
             tagPre.AddCssClass(PageClassNormal);
             tagPre.InnerHtml.Append("قبلی");
+            result.InnerHtml.AppendHtml(tagPre);
+        }
+
+        private void NextButton(IUrlHelper urlHelper, TagBuilder result)
+        {
+            TagBuilder tagPre = new("a");
+            tagPre.Attributes["href"] = urlHelper.Action(PageAction, new { pageSize = PageModel.PageSize, search = PageSearch, pageNumber = PageModel.PageNumber +1 });
+            tagPre.AddCssClass(PageModel.PageNumber < PageModel.TotalCount ? PageClass : "disabled");
+            tagPre.AddCssClass(PageClassNormal);
+            tagPre.InnerHtml.Append("بعدی");
             result.InnerHtml.AppendHtml(tagPre);
         }
     }

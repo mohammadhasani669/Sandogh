@@ -150,10 +150,9 @@ namespace Sandogh.WebSite.EndPoint
                  );
 
                 endpoints.MapControllerRoute(
-                name: "ProductDetails",
-                pattern: "Products/{id}/{Slug}",
-                defaults: new { controller = "Products", action= "Details" }
-
+                   name: "ProductDetails",
+                   pattern: "Products/{id}/{Slug}",
+                   defaults: new { controller = "Products", action= "Details" }
               );
 
                 endpoints.MapControllerRoute(

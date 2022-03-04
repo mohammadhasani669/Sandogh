@@ -57,6 +57,17 @@
                 </div>
                 <!-- Styled Pagination -->
                 <div class="styled-pagination">
+
+                       <div page-model ="new PageInfo(){PageSize= Model.PageSize,PageNumber = Model.PageIndex,TotalCount = Model.Count,PageCount = Model.Pager.Pages }"
+             page-action="Index"
+             page-classes-enabled="true"
+             page-class="btn"
+             page-class-normal=""
+           
+             page-class-selected="btn-success"></div>
+
+
+
                     <ul class="clearfix">
                         <li><a href="#" class="active">1</a></li>
                         <li><a href="#">2</a></li>
