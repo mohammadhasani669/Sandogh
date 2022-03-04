@@ -15,6 +15,7 @@ namespace Sandogh.Application.Products.Queries.GetAll
         public int pageSize { get; set; }
         public int Id { get; set; }
         public string Name { get; set; }
+        public string Slug { get; set; }
         public int Price { get; set; }
         public string Image { get; set; }
         public byte Rate { get; set; }

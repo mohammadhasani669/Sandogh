@@ -35,6 +35,7 @@ namespace Sandogh.Application.Products.Queries.GetAll
                     Name = p.Name,
                     Price = p.Price,
                     Image = p.Images.FirstOrDefault().Src,
+                    Slug = p.Slug,
                 }).ToList();
             return new PaginatedItemsDto<GetAllProductQuery>(request.page, request.pageSize, rowCount, data);
         }

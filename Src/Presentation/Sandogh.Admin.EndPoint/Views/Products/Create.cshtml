@@ -19,6 +19,8 @@
                         <div class="form-group">
                             <label asp-for="Name" class="control-label">نام محصول</label>
                             <input asp-for="Name" class="form-control" />
+                            <input asp-for="Slug"  placeholder="slug" class="form-control" />
+
                             <span asp-validation-for="Name" class="text-danger"></span>
                         </div>
                     </fieldset>
@@ -255,6 +257,7 @@
             var data = new FormData();
             //دریافت مقادیر از تکس باکس ها و....
             data.append("Name", $("#Name").val());
+            data.append("Slug", $("#Slug").val());
             data.append("AvailableStock", $("#AvailableStock").val());
             data.append("RestockThreshold", $("#RestockThreshold").val());
             data.append("MaxStockThreshold", $("#MaxStockThreshold").val());

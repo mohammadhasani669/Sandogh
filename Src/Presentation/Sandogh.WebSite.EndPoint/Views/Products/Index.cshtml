@@ -40,12 +40,12 @@
                             <div class="shop-item col-lg-4 col-md-6 col-sm-6 col-xs-12">
                                 <div class="inner-box">
                                     <div class="image">
-                                        <a href="@Url.Action("Details","Products",new {Id = item.Id})">
+                                        <a href="@Url.Action("Details","Products",new {Id = item.Id , Slug = item.Slug})">
                                             <img src="~/theme/images/resource/products/1.jpg" alt="">
                                         </a>
                                     </div>
                                     <div class="lower-content">
-                                        <h3><a href="@Url.Action("Details","Products",new {Id = item.Id})">@item.Name</a></h3>
+                                        <h3><a href="@Url.Action("Details","Products",new {Id = item.Id, Slug = item.Slug})">@item.Name</a></h3>
                                         <div class="price">@item.Price تومان</div>
                                         <a href="shop-single.html" class="theme-btn btn-style-one">افزودن به سبد</a>
                                     </div>
